@@ -2,10 +2,18 @@
 import { RouterLink, RouterView } from 'vue-router'
 import { ref, onMounted } from 'vue'
 
-const theme = ref('nyxane_low_dark')
+const theme = ref('dark')
+const themeLink = ref('./assets/Logo/nyxane_low_')
 
 function changeTheme() {
-  theme.value = "nyxane_low_dark"
+  if(theme.value === "light"){
+    theme.value = 'dark'
+  }else{
+    theme.value = "light"
+  }
+}
+const getImageUrl = (name) => {
+  return new URL(`${name + theme.value}.png`, import.meta.url).href
 }
 
 
@@ -15,7 +23,7 @@ function changeTheme() {
 <div>
   <nav>
     <div id="logo-img-wrapper" @click="changeTheme">
-    <img id="logo-img" :src="'@/assets/Logo/' + theme + '.png'" alt="">
+    <img id="logo-img" :src="getImageUrl(themeLink)" alt="">
     </div>
   </nav>
 </div>

@@ -26,3 +26,7 @@ coverage
 *.njsproj
 *.sln
 *.sw?
+/public/favicon.ico
+/src/assets/logo.svg
+/package-lock.json
+/.vscode/extensions.json
