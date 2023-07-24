@@ -1,6 +1,6 @@
 <script setup>
 /*import {RouterLink, RouterView} from 'vue-router'*/
-import {ref, onMounted} from 'vue'
+import {ref} from 'vue'
 import NyxaneHomePage from "@/views/NyxaneHomePage.vue";
 
 const theme = ref('dark')

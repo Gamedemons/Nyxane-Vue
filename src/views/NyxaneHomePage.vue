@@ -2,6 +2,7 @@
 import {onMounted, ref} from 'vue'
 
 const bg_starList = ref([]);
+
 function createStar() {
   const newStar = {
     id: Date.now(),
@@ -14,6 +15,7 @@ function createStar() {
     bg_starList.value.shift();
   }, 10000);
 }
+
 function animateStars() {
   setInterval(() => {
     createStar();
@@ -44,7 +46,7 @@ onMounted(() => {
                 <div id="planet4" class="entity"></div>
 
                 <div id="star">
-<!--                  <img src="@/assets/resources/aqual.svg" alt="">-->
+                  <!--<img src="@/assets/resources/aqual.svg" alt="">-->
                 </div>
 
               </div>
@@ -169,56 +171,61 @@ onMounted(() => {
 
 /* Planets */
 #planet0 {
-  background-color: #990000FF;
+  background-color: var(--planet-color);
   width: calc(var(--planet-radius) * var(--planet-size-multiplier));
   height: calc(var(--planet-radius) * var(--planet-size-multiplier));
   top: calc(var(--planet-shift) * var(--planet-size-multiplier) * var(--planet-shift-direction));
 }
+
 #planet0:hover {
-  box-shadow: 0px 0px 30px 5px #990000FF;
+  box-shadow: 0px 0px 30px 5px var(--planet-color);
 }
 
 #planet1 {
-  background-color: aliceblue;
+  background-color: var(--planet-color1);
   width: calc(var(--planet-radius1) * var(--planet-size-multiplier));
   height: calc(var(--planet-radius1) * var(--planet-size-multiplier));
   top: calc(var(--planet-shift1) * var(--planet-size-multiplier) * var(--planet-shift-direction));
 }
+
 #planet1:hover {
-  box-shadow: 0px 0px 30px 0px white;
+  box-shadow: 0px 0px 30px 0px var(--planet-color1);
 }
 
 #planet2 {
-  background-color: #00d8ff;
+  background-color: var(--planet-color2);
   width: calc(var(--planet-radius2) * var(--planet-size-multiplier));
   height: calc(var(--planet-radius2) * var(--planet-size-multiplier));
   top: calc(var(--planet-shift2) * var(--planet-size-multiplier) * var(--planet-shift-direction));
 }
+
 #planet2:hover {
-  box-shadow: 0px 0px 20px 5px #00d8ff;
+  box-shadow: 0px 0px 20px 5px var(--planet-color2);
 }
 
 #planet3 {
-  background-color: #440091;
+  background-color: var(--planet-color3);
   width: calc(var(--planet-radius3) * var(--planet-size-multiplier));
   height: calc(var(--planet-radius3) * var(--planet-size-multiplier));
   top: calc(var(--planet-shift3) * var(--planet-size-multiplier) * var(--planet-shift-direction));
 }
+
 #planet3:hover {
-  box-shadow: 0px 0px 30px 10px #440091;
+  box-shadow: 0px 0px 30px 10px var(--planet-color3);
 }
 
 #planet4 {
-  background-color: #434343;
+  background-color: var(--planet-color4);
   width: calc(var(--planet-radius4) * var(--planet-size-multiplier));
   height: calc(var(--planet-radius4) * var(--planet-size-multiplier));
   top: calc(var(--planet-shift4) * var(--planet-size-multiplier) * var(--planet-shift-direction));
 }
+
 #planet4:hover {
-  box-shadow: 0px 0px 30px 5px #434343;
+  box-shadow: 0px 0px 30px 5px var(--planet-color4);
 }
 
-/* animation: spinf 3s infinite;  Can be added to planets for subclass or moons */
+/* animation: spin 3s infinite;  Can be added to planets for subclass or moons */
 
 #stars_pane {
   height: 100%;

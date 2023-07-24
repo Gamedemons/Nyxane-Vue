@@ -57,6 +57,7 @@ body {
   --planet-shift: 7.5px;
   --planet-anim-duration: 140s;
   --planet-anim-speed: 1;
+  --planet-color: #990000;
 
   /* For div 1 */
   --planet-orbit-radius1: 151px;
@@ -64,6 +65,7 @@ body {
   --planet-shift1: 19.5px;
   --planet-anim-duration1: 130s;
   --planet-anim-speed1: 1;
+  --planet-color1: aliceblue;
 
   /* For div 2 */
   --planet-orbit-radius2: 110px;
@@ -71,6 +73,7 @@ body {
   --planet-shift2: 6.5px;
   --planet-anim-duration2: 80s;
   --planet-anim-speed2: 1;
+  --planet-color2: #00d8ff;
 
   /* For div 3 */
   --planet-orbit-radius3: 90px;
@@ -78,6 +81,7 @@ body {
   --planet-shift3: 8.25px;
   --planet-anim-duration3: 64s;
   --planet-anim-speed3: 1;
+  --planet-color3: #440091;
 
   /* For div 4 */
   --planet-orbit-radius4: 75px;
@@ -85,6 +89,7 @@ body {
   --planet-shift4: 3px;
   --planet-anim-duration4: 20s;
   --planet-anim-speed4: 1;
+  --planet-color4: #434343;
 
 
   /* Tips
