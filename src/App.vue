@@ -16,8 +16,6 @@ function changeTheme() {
 /*const getImageUrl = (name) => {
   return new URL(`${name + theme.value}.png`, import.meta.url).href
 }*/
-
-
 </script>
 
 <template>

@@ -174,12 +174,18 @@ onMounted(() => {
   height: calc(var(--planet-radius) * var(--planet-size-multiplier));
   top: calc(var(--planet-shift) * var(--planet-size-multiplier) * var(--planet-shift-direction));
 }
+#planet0:hover {
+  box-shadow: 0px 0px 30px 5px #990000FF;
+}
 
 #planet1 {
   background-color: aliceblue;
   width: calc(var(--planet-radius1) * var(--planet-size-multiplier));
   height: calc(var(--planet-radius1) * var(--planet-size-multiplier));
   top: calc(var(--planet-shift1) * var(--planet-size-multiplier) * var(--planet-shift-direction));
+}
+#planet1:hover {
+  box-shadow: 0px 0px 30px 0px white;
 }
 
 #planet2 {
@@ -188,6 +194,9 @@ onMounted(() => {
   height: calc(var(--planet-radius2) * var(--planet-size-multiplier));
   top: calc(var(--planet-shift2) * var(--planet-size-multiplier) * var(--planet-shift-direction));
 }
+#planet2:hover {
+  box-shadow: 0px 0px 20px 5px #00d8ff;
+}
 
 #planet3 {
   background-color: #440091;
@@ -195,12 +204,18 @@ onMounted(() => {
   height: calc(var(--planet-radius3) * var(--planet-size-multiplier));
   top: calc(var(--planet-shift3) * var(--planet-size-multiplier) * var(--planet-shift-direction));
 }
+#planet3:hover {
+  box-shadow: 0px 0px 30px 10px #440091;
+}
 
 #planet4 {
   background-color: #434343;
   width: calc(var(--planet-radius4) * var(--planet-size-multiplier));
   height: calc(var(--planet-radius4) * var(--planet-size-multiplier));
   top: calc(var(--planet-shift4) * var(--planet-size-multiplier) * var(--planet-shift-direction));
+}
+#planet4:hover {
+  box-shadow: 0px 0px 30px 5px #434343;
 }
 
 /* animation: spinf 3s infinite;  Can be added to planets for subclass or moons */
