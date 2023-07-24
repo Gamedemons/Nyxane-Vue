@@ -40,7 +40,9 @@ animateStars();
               <div id="ring4" class="orbit">
                 <div id="planet4" class="entity"></div>
 
-                <div id="star"></div>
+                <div id="star">
+                  <img src="@/assets/resources/aqual.svg" alt="">
+                </div>
 
               </div>
             </div>
@@ -77,6 +79,7 @@ animateStars();
 #star {
   /*border: 1px solid black;*/
   background: black;
+  overflow: hidden;
 
   border-radius: 50%;
   height: calc(var(--sun-radius) * var(--planet-size-multiplier));;
@@ -88,6 +91,16 @@ animateStars();
 
   box-shadow: 0px 0px 60px -5px #F2F2F2FF;
 }
+
+#star img {
+  width: 165px;
+  position: relative;
+  justify-self: center;
+  align-self: center;
+  top: -9px;
+  left: -12px;
+}
+
 
 /* Common properties for rings and planets (orbit and planets respectively) */
 .orbit {
@@ -104,6 +117,7 @@ animateStars();
   animation-timing-function: linear;
   animation-duration: 50s;
 }
+
 .entity {
   /*border: 1px solid black;*/
   border-radius: var(--planet-border-radius);
