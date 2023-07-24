@@ -1,6 +1,7 @@
 <script setup>
 import {onMounted, ref} from 'vue'
 
+const theme = ref('dark')
 const bg_starList = ref([]);
 
 function createStar() {
@@ -22,6 +23,15 @@ function animateStars() {
   }, 200);
 }
 
+function changeTheme() {
+  if (theme.value === "light") {
+    theme.value = 'dark'
+  } else {
+    theme.value = "light"
+  }
+}
+
+
 onMounted(() => {
   animateStars();
 })
@@ -29,25 +39,50 @@ onMounted(() => {
 
 
 <template>
+  <nav>
+    <div id="logo-img-wrapper" @click="changeTheme">
+      <img v-if="theme==='dark'" id="logo-img" src="@/assets/Logo/nyxane_low_dark.png" alt="">
+      <img v-else id="logo-img" src="@/assets/Logo/nyxane_low_light.png" alt="">
+    </div>
+  </nav>
   <section id="planetary_system">
     <div id="stars_pane">
-      <div v-for="bg_star in bg_starList" :key="bg_star.id" class="bg_stars" :style="{top:bg_star.top, left:bg_star.left}"></div>
+      <div v-for="bg_star in bg_starList" :key="bg_star.id" class="bg_stars"
+           :style="{top:bg_star.top, left:bg_star.left}"></div>
     </div>
     <div id="container">
-      <div id="ring0" class="orbit">
-        <div id="planet0" class="entity"></div>
-        <div id="ring1" class="orbit">
-          <div id="planet1" class="entity"></div>
-          <div id="ring2" class="orbit">
-            <div id="planet2" class="entity"></div>
-            <div id="ring3" class="orbit">
-              <div id="planet3" class="entity"></div>
-              <div id="ring4" class="orbit">
-                <div id="planet4" class="entity"></div>
 
-                <div id="star">
-                  <!--<img src="@/assets/resources/aqual.svg" alt="">-->
-                </div>
+      <div id="ring0" class="orbit">
+        <router-link class="nav-link entity" to="/games">
+          <div id="planet0" class="entity"></div>
+        </router-link>
+
+        <div id="ring1" class="orbit">
+          <router-link class="nav-link entity" to="/void">
+            <div id="planet1" class="entity"></div>
+          </router-link>
+
+          <div id="ring2" class="orbit">
+            <router-link class="nav-link entity" to="/anime">
+              <div id="planet2" class="entity"></div>
+            </router-link>
+
+            <div id="ring3" class="orbit">
+              <router-link class="nav-link entity" to="/music">
+                <div id="planet3" class="entity"></div>
+              </router-link>
+
+              <div id="ring4" class="orbit">
+                <router-link class="nav-link entity" to="/extras">
+                  <div id="planet4" class="entity"></div>
+                </router-link>
+
+                <!--Center Star ( Black )-->
+                <router-link class="nav-link-star" to="/github">
+                  <div id="star">
+                    <!--<img src="@/assets/resources/aqual.svg" alt="">-->
+                  </div>
+                </router-link>
 
               </div>
             </div>
@@ -65,6 +100,15 @@ onMounted(() => {
   justify-content: center;
   overflow: hidden;
   position: relative;
+}
+
+#logo-img {
+  width: 200px;
+}
+
+#logo-img-wrapper {
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 @keyframes spin {
@@ -238,4 +282,21 @@ onMounted(() => {
   background-color: white;
 }
 
+.nav-link-star {
+  text-decoration: none;
+  display: grid;
+
+  border-radius: 50%;
+  height: calc(var(--sun-radius) * var(--planet-size-multiplier));;
+  width: calc(var(--sun-radius) * var(--planet-size-multiplier));;
+
+  position: absolute;
+  justify-self: center;
+  align-self: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  display: grid;
+}
 </style>
