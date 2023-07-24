@@ -51,7 +51,7 @@
 }
 
 #star {
-  //border: 1px solid black;
+  /*border: 1px solid black;*/
   background: black;
 
   border-radius: 50%;
@@ -81,7 +81,7 @@
   animation-duration: 50s;
 }
 .entity {
-  //border: 1px solid black;
+  /*border: 1px solid black;*/
   border-radius: var(--planet-border-radius);
   position: absolute;
   justify-self: center;
