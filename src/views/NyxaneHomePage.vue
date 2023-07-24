@@ -2,7 +2,6 @@
 import {onMounted, ref} from 'vue'
 
 const bg_starList = ref([]);
-
 function createStar() {
   const newStar = {
     id: Date.now(),
@@ -15,7 +14,6 @@ function createStar() {
     bg_starList.value.shift();
   }, 10000);
 }
-
 function animateStars() {
   setInterval(() => {
     createStar();
