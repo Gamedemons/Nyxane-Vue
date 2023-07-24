@@ -143,6 +143,7 @@ animateStars();
 }
 
 #ring4 {
+  animation-direction: reverse;
   width: calc(var(--planet-orbit-radius4) * var(--orbit-size-multiplier));
   height: calc(var(--planet-orbit-radius4) * var(--orbit-size-multiplier));
   animation-duration: calc((var(--planet-anim-duration4) * var(--planet-anim-speed4)) / var(--planet-anim-master-speed));
