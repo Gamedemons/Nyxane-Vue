@@ -87,6 +87,11 @@
   justify-self: center;
 }
 
+.entity:hover {
+  scale: 1.1;
+  box-shadow: 0px 0px 30px -5px white;
+}
+
 
 /* Rings */
 #ring0 {

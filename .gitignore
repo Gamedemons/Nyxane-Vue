@@ -19,6 +19,7 @@ coverage
 
 # Editor directories and files
 .vscode/*
+.vite/deps/*
 !.vscode/extensions.json
 .idea
 *.suo
@@ -30,3 +31,4 @@ coverage
 /src/assets/logo.svg
 /package-lock.json
 /.vscode/extensions.json
+

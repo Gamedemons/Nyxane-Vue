@@ -68,7 +68,7 @@ body {
   /* For div 2 */
   --planet-orbit-radius2: 110px;
   --planet-radius2: 12px;
-  --planet-shift2: 8.5px;
+  --planet-shift2: 6.5px;
   --planet-anim-duration2: 80s;
   --planet-anim-speed2: 1;
 
