@@ -1,18 +1,19 @@
 <script setup>
-function createStar() {
-  const star = document.createElement("div");
-  star.className = "star";
-  star.style.left = Math.random() * window.innerWidth + "px";
-  star.style.top = Math.random() * window.innerHeight + "px";
-  star.style.position = "absolute";
-  star.style.width = "2px";
-  star.style.height = "2px";
-  star.style.backgroundColor = "white";
-  document.getElementById("stars_pane").appendChild(star);
+import {onMounted, ref} from 'vue'
 
+const bg_starList = ref([]);
+
+function createStar() {
+  const newStar = {
+    id: Date.now(),
+    top: Math.random() * window.innerHeight + "px",
+    left: Math.random() * window.innerWidth + "px",
+    func: setTimeout
+  }
+  bg_starList.value.push(newStar)
   setTimeout(() => {
-    star.remove();
-  }, 5000);
+    bg_starList.value.shift();
+  }, 10000);
 }
 
 function animateStars() {
@@ -21,13 +22,17 @@ function animateStars() {
   }, 200);
 }
 
-animateStars();
+onMounted(() => {
+  animateStars();
+})
 </script>
 
 
 <template>
   <section id="planetary_system">
-    <div id="stars_pane"></div>
+    <div id="stars_pane">
+      <div v-for="bg_star in bg_starList" :key="bg_star.id" class="bg_stars" :style="{top:bg_star.top, left:bg_star.left}"></div>
+    </div>
     <div id="container">
       <div id="ring0" class="orbit">
         <div id="planet0" class="entity"></div>
@@ -41,7 +46,7 @@ animateStars();
                 <div id="planet4" class="entity"></div>
 
                 <div id="star">
-                  <img src="@/assets/resources/aqual.svg" alt="">
+<!--                  <img src="@/assets/resources/aqual.svg" alt="">-->
                 </div>
 
               </div>
@@ -205,4 +210,12 @@ animateStars();
 #stars_pane {
   height: 100%;
 }
+
+.bg_stars {
+  position: absolute;
+  height: 2px;
+  width: 2px;
+  background-color: white;
+}
+
 </style>
