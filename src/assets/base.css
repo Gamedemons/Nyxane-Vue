@@ -15,48 +15,79 @@
   --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
   --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
 
-  --vt-c-text-light-1: var(--vt-c-indigo);
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 }
 
 /* semantic color variables for this project */
 :root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
-
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
-
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
-
   --section-gap: 160px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
-
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
-
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-  }
-}
-
 body {
-  color: var(--color-text);
-  background: var(--color-background);
+  color: black;
+  background-color: #000000;
 
   margin: 0;
   padding: 0;
 
   height: 100%;
   display: grid;
+
+  box-sizing: border-box;
+  position: relative;
+
+
+  /* Border radius of orbits and planets */
+  --planet-border-radius: 50%;
+  /* Animation Speed */
+  --planet-anim-master-speed: 1;
+  /* Change to increase of orbits or planets  */
+  --orbit-size-multiplier: 3.5;
+  --planet-size-multiplier: 2;
+  --planet-shift-direction: -1;
+
+
+  /* For Sun */
+  --sun-radius: 70px;
+
+  /* For div 0 */
+  --planet-orbit-radius: 196px;
+  --planet-radius: 25px;
+  --planet-shift: 7.5px;
+  --planet-anim-duration: 140s;
+  --planet-anim-speed: 1;
+
+  /* For div 1 */
+  --planet-orbit-radius1: 151px;
+  --planet-radius1: 43px;
+  --planet-shift1: 19.5px;
+  --planet-anim-duration1: 130s;
+  --planet-anim-speed1: 1;
+
+  /* For div 2 */
+  --planet-orbit-radius2: 110px;
+  --planet-radius2: 12px;
+  --planet-shift2: 6.5px;
+  --planet-anim-duration2: 80s;
+  --planet-anim-speed2: 1;
+
+  /* For div 3 */
+  --planet-orbit-radius3: 90px;
+  --planet-radius3: 14px;
+  --planet-shift3: 8.25px;
+  --planet-anim-duration3: 64s;
+  --planet-anim-speed3: 1;
+
+  /* For div 4 */
+  --planet-orbit-radius4: 75px;
+  --planet-radius4: 6px;
+  --planet-shift4: 3px;
+  --planet-anim-duration4: 20s;
+  --planet-anim-speed4: 1;
+
+
+  /* Tips
+  --planet-anim-master-speed : Higher is faster
+  --planet-anim-speed[num] : Higher is slower */
 }
