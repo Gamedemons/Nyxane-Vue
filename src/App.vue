@@ -37,7 +37,7 @@ const getImageUrl = (name) => {
 
 <style scoped>
 #logo-img {
-  width: 150px;
+  width: 200px;
 }
 
 #logo-img-wrapper {

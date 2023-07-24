@@ -1,10 +1,33 @@
 <script setup>
+function createStar() {
+  const star = document.createElement("div");
+  star.className = "star";
+  star.style.left = Math.random() * window.innerWidth + "px";
+  star.style.top = Math.random() * window.innerHeight + "px";
+  star.style.position = "absolute";
+  star.style.width = "2px";
+  star.style.height = "2px";
+  star.style.backgroundColor = "white";
+  document.getElementById("stars_pane").appendChild(star);
 
+  setTimeout(() => {
+    star.remove();
+  }, 5000);
+}
+
+function animateStars() {
+  setInterval(() => {
+    createStar();
+  }, 200);
+}
+
+animateStars();
 </script>
 
 
 <template>
   <section id="planetary_system">
+    <div id="stars_pane"></div>
     <div id="container">
       <div id="ring0" class="orbit">
         <div id="planet0" class="entity"></div>
@@ -34,6 +57,7 @@
   display: grid;
   justify-content: center;
   overflow: hidden;
+  position: relative;
 }
 
 @keyframes spin {
@@ -162,4 +186,8 @@
 }
 
 /* animation: spinf 3s infinite;  Can be added to planets for subclass or moons */
+
+#stars_pane {
+  height: 100%;
+}
 </style>
