@@ -334,36 +334,61 @@ onMounted(() => {
   display: grid;
 }
 
-#inner-circle {
+
+/*.cursor-circle{
   position: fixed;
   left: 10px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+}
+#inner-circle {
   height: 10px;
   width: 10px;
-  transform: translate(-50%, -50%);
   background-color: white;
-  mix-blend-mode: difference;
-  border-radius: 50%;
-  pointer-events: none;
+  !*mix-blend-mode: difference;*!
   transition: width 0.5s, height 0.5s;
-  z-index: 9999;
 }
 #inner-circle.grow {
-  height: 25px;
-  width: 25px;
+  height: 30px;
+  width: 30px;
   transition: width 0.5s, height 0.5s;
+  opacity: 0.5;
 }
-
 #outer-circle {
-  position: fixed;
-  left: 10px;
-  height: 25px;
-  width: 25px;
-  transform: translate(-50%, -50%);
+  height: 30px;
+  width: 30px;
   border: 1px solid white;
   mix-blend-mode: difference;
+  transition: 0.1s;
+}*/
+.cursor-circle{
+  position: fixed;
+  left: 10px;
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   pointer-events: none;
-  transition: 0.1s;
   z-index: 9999;
+}
+#inner-circle {
+  height: 10px;
+  width: 10px;
+  background-color: white;
+  mix-blend-mode: difference;
+  transition: width 0.5s, height 0.5s;
+}
+#inner-circle.grow {
+  height: 30px;
+  width: 30px;
+  transition: width 0.5s, height 0.5s;
+  opacity: 0.8;
+}
+#outer-circle {
+  height: 30px;
+  width: 30px;
+  border: 1px solid white;
+  mix-blend-mode: difference;
+  transition: 0.1s;
 }
 </style>
