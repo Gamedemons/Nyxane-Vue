@@ -59,7 +59,6 @@ onMounted(() => {
       innerCursor.classList.remove("grow-" + theme.value)
     })
   })
-
 })
 </script>
 
@@ -70,8 +69,8 @@ onMounted(() => {
     <div id="outer-circle" class="cursor-circle"></div>
     <nav>
       <div id="logo-img-wrapper" @click="changeTheme">
-        <img v-if="theme==='dark'" id="logo-img" src="@/assets/Logo/nyxane_low_dark.png" alt="">
-        <img v-else id="logo-img" src="@/assets/Logo/nyxane_low_light.png" alt="">
+        <img v-show="theme==='dark'" id="logo-img" src="@/assets/Logo/nyxane_low_dark.png" alt="Nyxane">
+        <img v-show="theme==='light'" id="logo-img" src="@/assets/Logo/nyxane_low_light.png" alt="Nyxane">
       </div>
     </nav>
     <section id="planetary_system">
@@ -335,7 +334,7 @@ onMounted(() => {
 }
 
 
-.cursor-circle{
+.cursor-circle {
   position: fixed;
   left: 10px;
   transform: translate(-50%, -50%);
@@ -351,6 +350,7 @@ onMounted(() => {
   background-color: white;
   transition: width 0.5s, height 0.5s;
 }
+
 #inner-circle-light.grow-light {
   height: 30px;
   width: 30px;
@@ -366,6 +366,7 @@ onMounted(() => {
   mix-blend-mode: difference;
   transition: width 0.5s, height 0.5s;
 }
+
 #inner-circle-dark.grow-dark {
   height: 30px;
   width: 30px;
