@@ -31,70 +31,104 @@ function changeTheme() {
   }
 }
 
+// Normal js here
+
+// js ends here
 
 onMounted(() => {
   animateStars();
+
+  // Cursor Circle Code
+  let innerCursor = document.getElementById("inner-circle")
+  let outerCursor = document.getElementById("outer-circle")
+  document.addEventListener("mousemove", (e) => {
+    let x = e.clientX;
+    let y = e.clientY;
+
+    innerCursor.style.left = `${x}px`
+    innerCursor.style.top = `${y}px`
+    outerCursor.style.left = `${x}px`
+    outerCursor.style.top = `${y}px`
+  })
+  let hoverableEntities = Array.from(document.getElementsByClassName("entity"))
+  hoverableEntities.forEach((entities) => {
+    entities.addEventListener("mouseover", () => {
+      innerCursor.classList.add("grow")
+    })
+    entities.addEventListener("mouseleave", () => {
+      innerCursor.classList.remove("grow")
+    })
+  })
+
 })
 </script>
 
 
 <template>
-  <nav>
-    <div id="logo-img-wrapper" @click="changeTheme">
-      <img v-if="theme==='dark'" id="logo-img" src="@/assets/Logo/nyxane_low_dark.png" alt="">
-      <img v-else id="logo-img" src="@/assets/Logo/nyxane_low_light.png" alt="">
-    </div>
-  </nav>
-  <section id="planetary_system">
-    <div id="stars_pane">
-      <div v-for="bg_star in bg_starList" :key="bg_star.id" class="bg_stars"
-           :style="{top:bg_star.top, left:bg_star.left}"></div>
-    </div>
-    <div id="container">
+  <div>
+    <div id="inner-circle" class="cursor-circle"></div>
+    <div id="outer-circle" class="cursor-circle"></div>
+    <nav>
+      <div id="logo-img-wrapper" @click="changeTheme">
+        <img v-if="theme==='dark'" id="logo-img" src="@/assets/Logo/nyxane_low_dark.png" alt="">
+        <img v-else id="logo-img" src="@/assets/Logo/nyxane_low_light.png" alt="">
+      </div>
+    </nav>
+    <section id="planetary_system">
+      <div id="stars_pane">
+        <div v-for="bg_star in bg_starList" :key="bg_star.id" class="bg_stars"
+             :style="{top:bg_star.top, left:bg_star.left}"></div>
+      </div>
+      <div id="container">
 
-      <div id="ring0" class="orbit">
-        <router-link class="nav-link entity" to="/games">
-          <div id="planet0" class="entity"></div>
-        </router-link>
-
-        <div id="ring1" class="orbit">
-          <router-link class="nav-link entity" to="/void">
-            <div id="planet1" class="entity"></div>
+        <div id="ring0" class="orbit">
+          <router-link class="nav-link entity" to="/games">
+            <div id="planet0" class="entity"></div>
           </router-link>
 
-          <div id="ring2" class="orbit">
-            <router-link class="nav-link entity" to="/anime">
-              <div id="planet2" class="entity"></div>
+          <div id="ring1" class="orbit">
+            <router-link class="nav-link entity" to="/void">
+              <div id="planet1" class="entity"></div>
             </router-link>
 
-            <div id="ring3" class="orbit">
-              <router-link class="nav-link entity" to="/music">
-                <div id="planet3" class="entity"></div>
+            <div id="ring2" class="orbit">
+              <router-link class="nav-link entity" to="/anime">
+                <div id="planet2" class="entity"></div>
               </router-link>
 
-              <div id="ring4" class="orbit">
-                <router-link class="nav-link entity" to="/extras">
-                  <div id="planet4" class="entity"></div>
+              <div id="ring3" class="orbit">
+                <router-link class="nav-link entity" to="/music">
+                  <div id="planet3" class="entity"></div>
                 </router-link>
 
-                <!--Center Star ( Black )-->
-                <router-link class="nav-link-star" to="/github">
-                  <div id="star">
-                    <!--<img src="@/assets/resources/aqual.svg" alt="">-->
-                  </div>
-                </router-link>
+                <div id="ring4" class="orbit">
+                  <router-link class="nav-link entity" to="/extras">
+                    <div id="planet4" class="entity"></div>
+                  </router-link>
 
+                  <!--Center Star ( Black )-->
+                  <router-link class="nav-link-star" to="/github">
+                    <div id="star">
+                      <!--<img src="@/assets/resources/aqual.svg" alt="">-->
+                    </div>
+                  </router-link>
+
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 
 <style scoped>
+* {
+  cursor: none;
+}
+
 #planetary_system {
   display: grid;
   justify-content: center;
@@ -298,5 +332,38 @@ onMounted(() => {
 .nav-link {
   text-decoration: none;
   display: grid;
+}
+
+#inner-circle {
+  position: fixed;
+  left: 10px;
+  height: 10px;
+  width: 10px;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  mix-blend-mode: difference;
+  border-radius: 50%;
+  pointer-events: none;
+  transition: width 0.5s, height 0.5s;
+  z-index: 9999;
+}
+#inner-circle.grow {
+  height: 25px;
+  width: 25px;
+  transition: width 0.5s, height 0.5s;
+}
+
+#outer-circle {
+  position: fixed;
+  left: 10px;
+  height: 25px;
+  width: 25px;
+  transform: translate(-50%, -50%);
+  border: 1px solid white;
+  mix-blend-mode: difference;
+  border-radius: 50%;
+  pointer-events: none;
+  transition: 0.1s;
+  z-index: 9999;
 }
 </style>
