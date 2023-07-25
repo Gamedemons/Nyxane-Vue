@@ -41,8 +41,8 @@ onMounted(() => {
   // Cursor Circle Code
   let innerCursor = document.getElementById("inner-circle-" + theme.value)
   let outerCursor = document.getElementById("outer-circle")
-  let spinPause = document.createElement('style');
-  spinPause.id = "spin-anim-pause-tag"
+  let spinPause = document.getElementById('spin-anim-pause-tag');
+  spinPause.innerHTML = '.orbit { animation-play-state: Playing; }';
 
   document.addEventListener("mousemove", (e) => {
     let x = e.clientX;
@@ -58,12 +58,10 @@ onMounted(() => {
     entities.addEventListener("mouseover", () => {
       innerCursor.classList.add("grow-" + theme.value)
       spinPause.innerHTML = '.orbit { animation-play-state: Paused; }';
-      document.head.appendChild(spinPause);
     })
     entities.addEventListener("mouseleave", () => {
       innerCursor.classList.remove("grow-" + theme.value)
       spinPause.innerHTML = '.orbit { animation-play-state: Playing; }';
-      document.head.appendChild(spinPause);
     })
   })
 })
