@@ -99,7 +99,9 @@ onMounted(() => {
 
             <div id="ring2" class="orbit">
               <router-link class="nav-link entity" to="/anime">
-                <div id="planet2" class="entity"></div>
+                <div id="planet2" class="entity">
+                  <div id="p2_moon" class="entity"></div>
+                </div>
               </router-link>
 
               <div id="ring3" class="orbit">
@@ -210,6 +212,7 @@ onMounted(() => {
 .entity {
   /*border: 1px solid black;*/
   border-radius: var(--planet-border-radius);
+  display: grid;
   position: absolute;
   justify-self: center;
 }
@@ -282,6 +285,7 @@ onMounted(() => {
   width: calc(var(--planet-radius2) * var(--planet-size-multiplier));
   height: calc(var(--planet-radius2) * var(--planet-size-multiplier));
   top: calc(var(--planet-shift2) * var(--planet-size-multiplier) * var(--planet-shift-direction));
+  animation: spin 10s infinite linear;
 }
 
 #planet2:hover {
@@ -311,6 +315,14 @@ onMounted(() => {
 }
 
 /* animation: spin 3s infinite;  Can be added to planets for subclass or moons */
+#p2_moon {
+  height: 4px;
+  width: 4px;
+  background-color: chartreuse;
+  justify-self: center;
+  position: absolute;
+  top: -7px;
+}
 
 #stars_pane {
   height: 100%;
