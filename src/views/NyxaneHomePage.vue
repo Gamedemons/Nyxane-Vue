@@ -39,7 +39,7 @@ onMounted(() => {
   animateStars();
 
   // Cursor Circle Code
-  let innerCursor = document.getElementById("inner-circle")
+  let innerCursor = document.getElementById("inner-circle-" + theme.value)
   let outerCursor = document.getElementById("outer-circle")
   document.addEventListener("mousemove", (e) => {
     let x = e.clientX;
@@ -53,10 +53,10 @@ onMounted(() => {
   let hoverableEntities = Array.from(document.getElementsByClassName("entity"))
   hoverableEntities.forEach((entities) => {
     entities.addEventListener("mouseover", () => {
-      innerCursor.classList.add("grow")
+      innerCursor.classList.add("grow-" + theme.value)
     })
     entities.addEventListener("mouseleave", () => {
-      innerCursor.classList.remove("grow")
+      innerCursor.classList.remove("grow-" + theme.value)
     })
   })
 
@@ -66,7 +66,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <div id="inner-circle" class="cursor-circle"></div>
+    <div :id="`inner-circle-` + theme" class="cursor-circle"></div>
     <div id="outer-circle" class="cursor-circle"></div>
     <nav>
       <div id="logo-img-wrapper" @click="changeTheme">
@@ -335,34 +335,6 @@ onMounted(() => {
 }
 
 
-/*.cursor-circle{
-  position: fixed;
-  left: 10px;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-}
-#inner-circle {
-  height: 10px;
-  width: 10px;
-  background-color: white;
-  !*mix-blend-mode: difference;*!
-  transition: width 0.5s, height 0.5s;
-}
-#inner-circle.grow {
-  height: 30px;
-  width: 30px;
-  transition: width 0.5s, height 0.5s;
-  opacity: 0.5;
-}
-#outer-circle {
-  height: 30px;
-  width: 30px;
-  border: 1px solid white;
-  mix-blend-mode: difference;
-  transition: 0.1s;
-}*/
 .cursor-circle{
   position: fixed;
   left: 10px;
@@ -371,19 +343,36 @@ onMounted(() => {
   pointer-events: none;
   z-index: 9999;
 }
-#inner-circle {
+
+/* Light Theme Cursor ***************************/
+#inner-circle-light {
+  height: 10px;
+  width: 10px;
+  background-color: white;
+  transition: width 0.5s, height 0.5s;
+}
+#inner-circle-light.grow-light {
+  height: 30px;
+  width: 30px;
+  transition: width 0.5s, height 0.5s;
+  opacity: 0.5;
+}
+
+/* Dark Theme Cursor ****************************/
+#inner-circle-dark {
   height: 10px;
   width: 10px;
   background-color: white;
   mix-blend-mode: difference;
   transition: width 0.5s, height 0.5s;
 }
-#inner-circle.grow {
+#inner-circle-dark.grow-dark {
   height: 30px;
   width: 30px;
   transition: width 0.5s, height 0.5s;
   opacity: 0.8;
 }
+
 #outer-circle {
   height: 30px;
   width: 30px;
