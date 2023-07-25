@@ -76,4 +76,7 @@ body {
   /* Tips
   --planet-anim-master-speed : Higher is faster
   --planet-anim-speed[num] : Higher is slower */
+
+  --def: #96B7C4;
+  --inv: #fff;
 }
