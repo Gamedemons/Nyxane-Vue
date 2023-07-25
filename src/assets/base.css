@@ -42,7 +42,7 @@ body {
 
   /* For div 1 */
   --planet-orbit-radius1: 151px;
-  --planet-radius1: 43px;
+  --planet-radius1: 41px;
   --planet-shift1: 19.5px;
   --planet-anim-duration1: 130s;
   --planet-anim-speed1: 1;

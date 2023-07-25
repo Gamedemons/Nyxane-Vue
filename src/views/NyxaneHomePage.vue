@@ -41,6 +41,9 @@ onMounted(() => {
   // Cursor Circle Code
   let innerCursor = document.getElementById("inner-circle-" + theme.value)
   let outerCursor = document.getElementById("outer-circle")
+  let spinPause = document.createElement('style');
+  spinPause.id = "spin-anim-pause-tag"
+
   document.addEventListener("mousemove", (e) => {
     let x = e.clientX;
     let y = e.clientY;
@@ -54,9 +57,13 @@ onMounted(() => {
   hoverableEntities.forEach((entities) => {
     entities.addEventListener("mouseover", () => {
       innerCursor.classList.add("grow-" + theme.value)
+      spinPause.innerHTML = '.orbit { animation-play-state: Paused; }';
+      document.head.appendChild(spinPause);
     })
     entities.addEventListener("mouseleave", () => {
       innerCursor.classList.remove("grow-" + theme.value)
+      spinPause.innerHTML = '.orbit { animation-play-state: Playing; }';
+      document.head.appendChild(spinPause);
     })
   })
 })
@@ -208,7 +215,7 @@ onMounted(() => {
 }
 
 .entity:hover {
-  scale: 1.1;
+  scale: 1.05;
   box-shadow: 0px 0px 30px -5px white;
 }
 
@@ -252,6 +259,7 @@ onMounted(() => {
   width: calc(var(--planet-radius) * var(--planet-size-multiplier));
   height: calc(var(--planet-radius) * var(--planet-size-multiplier));
   top: calc(var(--planet-shift) * var(--planet-size-multiplier) * var(--planet-shift-direction));
+  z-index: 9999;
 }
 
 #planet0:hover {
@@ -378,7 +386,6 @@ onMounted(() => {
   height: 30px;
   width: 30px;
   border: 1px solid white;
-  mix-blend-mode: difference;
   transition: 0.1s;
 }
 </style>
