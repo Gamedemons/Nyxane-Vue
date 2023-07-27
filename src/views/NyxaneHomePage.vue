@@ -117,7 +117,7 @@ onMounted(() => {
 
                   <!--Center Star ( Black )-->
                   <router-link class="nav-link-star" to="/github">
-                    <div id="star">
+                    <div id="star" class="entity">
                       <!--<img src="@/assets/resources/aqual.svg" alt="">-->
                     </div>
                   </router-link>
@@ -149,7 +149,6 @@ onMounted(() => {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-
 #nav-menu {
   display: grid;
   justify-self: right;
@@ -159,7 +158,6 @@ onMounted(() => {
 #logo-img {
   width: 200px;
 }
-
 #logo-img-wrapper {
   margin-top: 10px;
   margin-left: 10px;
@@ -180,21 +178,13 @@ onMounted(() => {
 }
 
 #star {
-  /*border: 1px solid black;*/
   background: black;
+  box-shadow: 0px 0px 60px -5px #F2F2F2FF;
   overflow: hidden;
-
-  border-radius: 50%;
+  align-self: center;
   height: calc(var(--sun-radius) * var(--planet-size-multiplier));;
   width: calc(var(--sun-radius) * var(--planet-size-multiplier));;
-
-  position: absolute;
-  justify-self: center;
-  align-self: center;
-
-  box-shadow: 0px 0px 60px -5px #F2F2F2FF;
 }
-
 #star img {
   width: 165px;
   position: relative;
@@ -222,13 +212,11 @@ onMounted(() => {
 }
 
 .entity {
-  /*border: 1px solid black;*/
   border-radius: var(--planet-border-radius);
   display: grid;
   position: absolute;
   justify-self: center;
 }
-
 .entity:hover {
   scale: 1.05;
   box-shadow: 0px 0px 30px -5px white;
@@ -241,25 +229,21 @@ onMounted(() => {
   height: calc(var(--planet-orbit-radius) * var(--orbit-size-multiplier));
   animation-duration: calc((var(--planet-anim-duration) * var(--planet-anim-speed)) / var(--planet-anim-master-speed));
 }
-
 #ring1 {
   width: calc(var(--planet-orbit-radius1) * var(--orbit-size-multiplier));
   height: calc(var(--planet-orbit-radius1) * var(--orbit-size-multiplier));
   animation-duration: calc((var(--planet-anim-duration1) * var(--planet-anim-speed1)) / var(--planet-anim-master-speed));
 }
-
 #ring2 {
   width: calc(var(--planet-orbit-radius2) * var(--orbit-size-multiplier));
   height: calc(var(--planet-orbit-radius2) * var(--orbit-size-multiplier));
   animation-duration: calc((var(--planet-anim-duration2) * var(--planet-anim-speed2)) / var(--planet-anim-master-speed));
 }
-
 #ring3 {
   width: calc(var(--planet-orbit-radius3) * var(--orbit-size-multiplier));
   height: calc(var(--planet-orbit-radius3) * var(--orbit-size-multiplier));
   animation-duration: calc((var(--planet-anim-duration3) * var(--planet-anim-speed3)) / var(--planet-anim-master-speed));
 }
-
 #ring4 {
   animation-direction: reverse;
   width: calc(var(--planet-orbit-radius4) * var(--orbit-size-multiplier));
@@ -276,7 +260,6 @@ onMounted(() => {
   top: calc(var(--planet-shift) * var(--planet-size-multiplier) * var(--planet-shift-direction));
   z-index: 9999;
 }
-
 #planet0:hover {
   box-shadow: 0px 0px 30px 5px var(--planet-color);
 }
@@ -287,7 +270,6 @@ onMounted(() => {
   height: calc(var(--planet-radius1) * var(--planet-size-multiplier));
   top: calc(var(--planet-shift1) * var(--planet-size-multiplier) * var(--planet-shift-direction));
 }
-
 #planet1:hover {
   box-shadow: 0px 0px 30px 0px var(--planet-color1);
 }
@@ -299,7 +281,6 @@ onMounted(() => {
   top: calc(var(--planet-shift2) * var(--planet-size-multiplier) * var(--planet-shift-direction));
   animation: spin 10s infinite linear;
 }
-
 #planet2:hover {
   box-shadow: 0px 0px 20px 5px var(--planet-color2);
 }
@@ -310,7 +291,6 @@ onMounted(() => {
   height: calc(var(--planet-radius3) * var(--planet-size-multiplier));
   top: calc(var(--planet-shift3) * var(--planet-size-multiplier) * var(--planet-shift-direction));
 }
-
 #planet3:hover {
   box-shadow: 0px 0px 30px 10px var(--planet-color3);
 }
@@ -321,7 +301,6 @@ onMounted(() => {
   height: calc(var(--planet-radius4) * var(--planet-size-multiplier));
   top: calc(var(--planet-shift4) * var(--planet-size-multiplier) * var(--planet-shift-direction));
 }
-
 #planet4:hover {
   box-shadow: 0px 0px 30px 5px var(--planet-color4);
 }
@@ -339,7 +318,6 @@ onMounted(() => {
 #stars_pane {
   height: 100%;
 }
-
 .bg_stars {
   position: absolute;
   height: 2px;
@@ -359,7 +337,6 @@ onMounted(() => {
   justify-self: center;
   align-self: center;
 }
-
 .nav-link {
   text-decoration: none;
   display: grid;
@@ -382,7 +359,6 @@ onMounted(() => {
   background-color: white;
   transition: width 0.5s, height 0.5s;
 }
-
 #inner-circle-light.grow-light {
   height: 30px;
   width: 30px;
@@ -398,7 +374,6 @@ onMounted(() => {
   mix-blend-mode: difference;
   transition: width 0.5s, height 0.5s;
 }
-
 #inner-circle-dark.grow-dark {
   height: 30px;
   width: 30px;
@@ -462,9 +437,6 @@ onMounted(() => {
 
 
 
-
-
-
 /* ~~~~~~~ INIT. BTN ~~~~~~~ */
 #fx-cut {
   position: absolute;
@@ -504,7 +476,7 @@ onMounted(() => {
 
 .btn:hover:after {
   background: var(--inv);
-  transition-delay: .35s;
+  transition-delay: .55s;
 }
 
 /* From Right */
