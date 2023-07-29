@@ -2,6 +2,7 @@
 import {onMounted, ref} from 'vue'
 
 const theme = ref('dark')
+const menuActive = ref(false)
 const bg_starList = ref([]);
 
 function createStar() {
@@ -31,8 +32,11 @@ function changeTheme() {
   }
 }
 
-// Normal js here
+function toggleMenu() {
+  menuActive.value = !menuActive.value;
+}
 
+// Normal js here
 // js ends here
 
 onMounted(() => {
@@ -72,15 +76,21 @@ onMounted(() => {
   <div>
     <div :id="`inner-circle-` + theme" class="cursor-circle"></div>
     <div id="outer-circle" class="cursor-circle"></div>
+
     <nav id="nav-bar">
       <div id="logo-img-wrapper" @click="changeTheme">
-        <img v-show="theme==='dark'" id="logo-img" src="@/assets/Logo/nyxane_low_dark.png" alt="Nyxane">
-        <img v-show="theme==='light'" id="logo-img" src="@/assets/Logo/nyxane_low_light.png" alt="Nyxane">
+        <img v-show="theme==='dark'" id="logo-img" src="@/assets/Logo/nyxane_svg_dark.svg" alt="Nyxane">
+        <img v-show="theme==='light'" id="logo-img" src="@/assets/Logo/nyxane_svg_light.svg" alt="Nyxane">
       </div>
-      <div id="nav-menu">
-        <div class="btn from-right"><div id="fx-cut"></div>Menu</div>
+      <div id="nav-menu" @click="toggleMenu">
+        <div id="menuButton" class="hamburger" :class="{isactive: menuActive }">
+          <span class="menuline"></span>
+          <span class="menuline"></span>
+          <span class="menuline"></span>
+        </div>
       </div>
     </nav>
+
     <section id="planetary_system">
       <div id="stars_pane">
         <div v-for="bg_star in bg_starList" :key="bg_star.id" class="bg_stars"
@@ -89,34 +99,34 @@ onMounted(() => {
       <div id="container">
 
         <div id="ring0" class="orbit">
-          <router-link class="nav-link entity" to="/games">
+          <router-link class="nav-link entity" :to="{name : 'games-page'}">
             <div id="planet0" class="entity"></div>
           </router-link>
 
           <div id="ring1" class="orbit">
-            <router-link class="nav-link entity" to="/void">
+            <router-link class="nav-link entity" :to="{name : 'void-page'}">
               <div id="planet1" class="entity"></div>
             </router-link>
 
             <div id="ring2" class="orbit">
-              <router-link class="nav-link entity" to="/anime">
+              <router-link class="nav-link entity" :to="{name : 'anime-page'}">
                 <div id="planet2" class="entity">
                   <div id="p2_moon" class="entity"></div>
                 </div>
               </router-link>
 
               <div id="ring3" class="orbit">
-                <router-link class="nav-link entity" to="/music">
+                <router-link class="nav-link entity" :to="{name : 'music-page'}">
                   <div id="planet3" class="entity"></div>
                 </router-link>
 
                 <div id="ring4" class="orbit">
-                  <router-link class="nav-link entity" to="/extras">
+                  <router-link class="nav-link entity" :to="{name : 'extras-page'}">
                     <div id="planet4" class="entity"></div>
                   </router-link>
 
                   <!--Center Star ( Black )-->
-                  <router-link class="nav-link-star" to="/github">
+                  <router-link class="nav-link-star" :to="{name : 'github-page'}">
                     <div id="star" class="entity">
                       <!--<img src="@/assets/resources/aqual.svg" alt="">-->
                     </div>
@@ -138,31 +148,85 @@ onMounted(() => {
   cursor: none;
 }
 
-#planetary_system {
-  display: grid;
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
-}
 
+
+/* Navbar styles */
 #nav-bar {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
 #nav-menu {
   display: grid;
   justify-self: right;
   align-self: center;
 }
 
-#logo-img {
-  width: 200px;
-}
 #logo-img-wrapper {
   margin-top: 10px;
   margin-left: 10px;
 }
+#logo-img {
+  width: 200px;
+}
 
+#menuButton {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+#menuButton.isactive {
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+#menuButton:before {
+  content: "";
+  position: absolute;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 70px;
+  height: 70px;
+  border: 5px solid transparent;
+  top: calc(50% - 35px);
+  left: calc(50% - 35px);
+  border-radius: 50%;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+#menuButton.isactive:before {
+  border: 5px solid #ecf0f1;
+}
+
+.menuline {
+  width: 50px;
+  height: 5px;
+  background-color: #ecf0f1;
+  display: block;
+  margin: 8px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+#menuButton.isactive .menuline {
+  width: 35px;
+}
+#menuButton.isactive .menuline:nth-child(1) {
+  -webkit-transform: translateY(13px);
+  -ms-transform: translateY(13px);
+  transform: translateY(13px);
+}
+#menuButton.isactive .menuline:nth-child(2) {
+  opacity: 0;
+}
+#menuButton.isactive .menuline:nth-child(3) {
+  -webkit-transform: translateY(-13px) rotate(90deg);
+  -ms-transform: translateY(-13px) rotate(90deg);
+  transform: translateY(-13px) rotate(90deg);
+}
+
+
+
+/* Planetary System */
 @keyframes spin {
   from {
     rotate: 0deg;
@@ -170,6 +234,13 @@ onMounted(() => {
   to {
     rotate: 360deg;
   }
+}
+
+#planetary_system {
+  display: grid;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
 }
 
 #container {
@@ -193,7 +264,6 @@ onMounted(() => {
   top: -9px;
   left: -12px;
 }
-
 
 /* Common properties for rings and planets (orbit and planets respectively) */
 .orbit {
@@ -229,21 +299,25 @@ onMounted(() => {
   height: calc(var(--planet-orbit-radius) * var(--orbit-size-multiplier));
   animation-duration: calc((var(--planet-anim-duration) * var(--planet-anim-speed)) / var(--planet-anim-master-speed));
 }
+
 #ring1 {
   width: calc(var(--planet-orbit-radius1) * var(--orbit-size-multiplier));
   height: calc(var(--planet-orbit-radius1) * var(--orbit-size-multiplier));
   animation-duration: calc((var(--planet-anim-duration1) * var(--planet-anim-speed1)) / var(--planet-anim-master-speed));
 }
+
 #ring2 {
   width: calc(var(--planet-orbit-radius2) * var(--orbit-size-multiplier));
   height: calc(var(--planet-orbit-radius2) * var(--orbit-size-multiplier));
   animation-duration: calc((var(--planet-anim-duration2) * var(--planet-anim-speed2)) / var(--planet-anim-master-speed));
 }
+
 #ring3 {
   width: calc(var(--planet-orbit-radius3) * var(--orbit-size-multiplier));
   height: calc(var(--planet-orbit-radius3) * var(--orbit-size-multiplier));
   animation-duration: calc((var(--planet-anim-duration3) * var(--planet-anim-speed3)) / var(--planet-anim-master-speed));
 }
+
 #ring4 {
   animation-direction: reverse;
   width: calc(var(--planet-orbit-radius4) * var(--orbit-size-multiplier));
@@ -260,6 +334,7 @@ onMounted(() => {
   top: calc(var(--planet-shift) * var(--planet-size-multiplier) * var(--planet-shift-direction));
   z-index: 9999;
 }
+
 #planet0:hover {
   box-shadow: 0px 0px 30px 5px var(--planet-color);
 }
@@ -270,6 +345,7 @@ onMounted(() => {
   height: calc(var(--planet-radius1) * var(--planet-size-multiplier));
   top: calc(var(--planet-shift1) * var(--planet-size-multiplier) * var(--planet-shift-direction));
 }
+
 #planet1:hover {
   box-shadow: 0px 0px 30px 0px var(--planet-color1);
 }
@@ -281,6 +357,7 @@ onMounted(() => {
   top: calc(var(--planet-shift2) * var(--planet-size-multiplier) * var(--planet-shift-direction));
   animation: spin 10s infinite linear;
 }
+
 #planet2:hover {
   box-shadow: 0px 0px 20px 5px var(--planet-color2);
 }
@@ -291,6 +368,7 @@ onMounted(() => {
   height: calc(var(--planet-radius3) * var(--planet-size-multiplier));
   top: calc(var(--planet-shift3) * var(--planet-size-multiplier) * var(--planet-shift-direction));
 }
+
 #planet3:hover {
   box-shadow: 0px 0px 30px 10px var(--planet-color3);
 }
@@ -301,6 +379,7 @@ onMounted(() => {
   height: calc(var(--planet-radius4) * var(--planet-size-multiplier));
   top: calc(var(--planet-shift4) * var(--planet-size-multiplier) * var(--planet-shift-direction));
 }
+
 #planet4:hover {
   box-shadow: 0px 0px 30px 5px var(--planet-color4);
 }
@@ -318,6 +397,7 @@ onMounted(() => {
 #stars_pane {
   height: 100%;
 }
+
 .bg_stars {
   position: absolute;
   height: 2px;
@@ -337,12 +417,15 @@ onMounted(() => {
   justify-self: center;
   align-self: center;
 }
+
 .nav-link {
   text-decoration: none;
   display: grid;
 }
 
 
+
+/* Cursor styles */
 .cursor-circle {
   position: fixed;
   left: 10px;
@@ -388,119 +471,4 @@ onMounted(() => {
   transition: 0.1s;
 }
 
-
-.menu {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  padding: 0;
-  outline: none;
-}
-.line {
-  fill: none;
-  stroke: white;
-  stroke-width: 6;
-  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
-  stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-.line1 {
-  stroke-dasharray: 60 207;
-  stroke-width: 6;
-}
-.line2 {
-  stroke-dasharray: 60 60;
-  stroke-width: 6;
-}
-.line3 {
-  stroke-dasharray: 60 207;
-  stroke-width: 6;
-}
-.opened .line1 {
-  stroke-dasharray: 90 207;
-  stroke-dashoffset: -134;
-  stroke-width: 6;
-}
-.opened .line2 {
-  stroke-dasharray: 1 60;
-  stroke-dashoffset: -30;
-  stroke-width: 6;
-}
-.opened .line3 {
-  stroke-dasharray: 90 207;
-  stroke-dashoffset: -134;
-  stroke-width: 6;
-}
-
-
-
-
-
-
-/* ~~~~~~~ INIT. BTN ~~~~~~~ */
-#fx-cut {
-  position: absolute;
-  height: 5.25em;
-  width: 2em;
-  top: 8px;
-  left: -17px;
-  background-color: black;
-  rotate: -45deg;
-
-}
-.btn {
-  position: relative;
-  padding: 1.25rem 1rem;
-  padding-left: 3em;
-  color: var(--inv);
-  letter-spacing: 0.4rem;
-  text-transform: uppercase;
-  transition: all 500ms cubic-bezier(0.77, 0, 0.175, 1);
-}
-
-.btn:before, .btn:after {
-  content: '';
-  position: absolute;
-  transition: inherit;
-  z-index: -1;
-}
-
-.btn:hover {
-  color: var(--def);
-  transition-delay: .5s;
-}
-
-.btn:hover:before {
-  transition-delay: 0s;
-}
-
-.btn:hover:after {
-  background: var(--inv);
-  transition-delay: .55s;
-}
-
-/* From Right */
-
-.from-right:before,
-.from-right:after {
-  top: 0;
-  width: 0;
-  height: 100%;
-}
-
-.from-right:before {
-  left: 0;
-  border: 1px solid var(--inv);
-  border-left: 0;
-  border-right: 0;
-}
-
-.from-right:after {
-  right: 0;
-}
-
-.from-right:hover:before,
-.from-right:hover:after {
-  width: 100%;
-}
 </style>
