@@ -20,7 +20,15 @@ let godData = {
     godNickname: "Fate Breaker",
     tabImageUrl: "../assets/resources/zagreus.png",
     dialogCount: 0,
-    tabInfo: ["Hey there how is it going ?"],
+    tabInfo: [
+        "Greetings friend ! I'm Zagreus, the god of Disboard. What is Disboard you ask ?? Well it a world of games, everything you do or see is related to games somehow. Ah ! I nearly forgot, Welcome to the world of Disboard my firend.",
+        "Is there anything more you would like to ask ? My background ?? Sure... no problems, I am from the game Hades. You should try it sometime, I feel like you will find it very enjoyable to play.",
+        "Oh ! I did not see coming. So you're back, what's wrong ? Wait you lost your way... Haha now that's hilarious. I think we will get along quite well.",
+        "Hey there how is it going ?",
+        "Looking as good as ever I see.",
+        "You are asking me how I got so strong ? Well that's by dying a lot of times ( I'm not kidding ! )",
+        "Now where did that flatboard witch go... I swear I saw her running in this direction."
+    ],
     isHelper: false,
   },
   p2_link: {
@@ -29,7 +37,12 @@ let godData = {
     godNickname: "The Epilogue",
     tabImageUrl: "../assets/resources/nyx.webp",
     dialogCount: 0,
-    tabInfo: [""],
+    tabInfo: [
+        "Hello child. This is the void realm. Im Shallow Vernal, the creator of this realm. You are free to wander if you want.",
+        "The great overseer is currently busy thinking about the incomprehensibly complex problems of the void realm.",
+        "You're asking me if I am interested in you ? Well I already have my Kaito san so I dont need anyone else.",
+        "The great overseer spends her day as peacefully as ever."
+    ],
     isHelper: true,
     helper: {
       tabName: "void",
@@ -46,7 +59,9 @@ let godData = {
     godNickname: "Chaos Creator",
     tabImageUrl: "../assets/resources/nyx.webp",
     dialogCount: 0,
-    tabInfo: [""],
+    tabInfo: [
+        "Hey ! I'm Rimuru Tempest, the founder of Tempest Nation and the god of Animon and this here is my friend Senkuu Ishigami. I'm ten billion percent sure you would have heard of him. If not, you just might be living under a rock.",
+    ],
     isHelper: false,
   },
   p3_moon_link: {
@@ -118,7 +133,7 @@ function updateCurrentTab(data) {
   currentTabValues.godName = data.godName;
   currentTabValues.godNickname = data.godNickname;
   currentTabValues.tabImageUrl = data.tabImageUrl;
-  currentTabValues.tabInfo = data.tabInfo;
+  currentTabValues.tabInfo = data.tabInfo[data.dialogCount];
 }
 
 function changeCurrentTab(e) {
@@ -126,14 +141,17 @@ function changeCurrentTab(e) {
   let isHelperPresent = godData[currentTabHovered.value + ""]["isHelper"]
   if (!(isHelperPresent === true)) {
     updateCurrentTab(godData[currentTabHovered.value + ""])
+    godData[currentTabHovered.value + ""]["dialogCount"] += 1
   } else
   {
     let chances = Math.floor(Math.random() * 100);
     if (chances <= 90) {
       updateCurrentTab(godData[currentTabHovered.value + ""])
+      godData[currentTabHovered.value + ""]["dialogCount"] += 1
     } else
     {
       updateCurrentTab(godData[currentTabHovered.value + ""]["helper"])
+      godData[currentTabHovered.value + ""]["helper"]["dialogCount"] += 1
     }
   }
 }
@@ -210,7 +228,7 @@ onMounted(() => {
             <div id="entity_god_wrapper">
             <img id="entity_god" :src="getPngUrl(currentTabValues.tabImageUrl)" alt="">
             </div>
-            <div id="entity_dialogue">{{ currentTabValues.tabInfo[0] }}</div>
+            <div id="entity_dialogue">{{ currentTabValues.tabInfo}}</div>
           </div>
         </div>
         <div id="tabLinks" class="menuTabElements">
@@ -487,16 +505,28 @@ onMounted(() => {
 
 #god_pane {
   height: 100vh;
+  display: grid;
 }
 #entity_god_wrapper {
   position: absolute;
   bottom: 0;
+  left: 0;
 }
 #entity_god {
   width: 650px;
 }
 #entity_dialogue {
+  background-color: rgba(0, 0, 0, 0.7);
   color: white;
+  font-size: 2em;
+  padding: 10px 10px 10px 15px;
+  border: 3px solid white;
+  border-radius: 20px;
+  position: absolute;
+  bottom: 40px;
+  width: 25em;
+  height: 6em;
+  justify-self: end;
 }
 
 
