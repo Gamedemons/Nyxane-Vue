@@ -55,6 +55,7 @@ body {
   --planet-anim-duration2: 80s;
   --planet-anim-speed2: 1;
   --planet-color2: #00d8ff;
+  --planet2-moon-color: chartreuse;
 
   /* For div 3 */
   --planet-orbit-radius3: 90px;
@@ -62,7 +63,7 @@ body {
   --planet-shift3: 7.1px;
   --planet-anim-duration3: 64s;
   --planet-anim-speed3: 1;
-  --planet-color3: #440091;
+  --planet-color3: #FADD9B;
 
   /* For div 4 */
   --planet-orbit-radius4: 75px;

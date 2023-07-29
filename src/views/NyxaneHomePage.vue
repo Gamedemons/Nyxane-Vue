@@ -1,9 +1,82 @@
 <script setup>
-import {onMounted, ref} from 'vue'
+import {onMounted, reactive, ref} from 'vue'
 
 const theme = ref('dark')
 const menuActive = ref(false)
 const bg_starList = ref([]);
+const currentTabHovered = ref("none")
+const currentTabValues = reactive({
+  tabName: "",
+  godName: "",
+  godNickname: "",
+  tabImageUrl: "",
+  tabInfo: ""
+})
+
+let godData = {
+  p1_link: {
+    tabName: "games",
+    godName: "Zagreus",
+    godNickname: "Fate Breaker",
+    tabImageUrl: "../assets/resources/zagreus.png",
+    dialogCount: 0,
+    tabInfo: ["Hey there how is it going ?"],
+    isHelper: false,
+  },
+  p2_link: {
+    tabName: "void",
+    godName: "Shallow Vernal",
+    godNickname: "The Epilogue",
+    tabImageUrl: "../assets/resources/nyx.webp",
+    dialogCount: 0,
+    tabInfo: [""],
+    isHelper: true,
+    helper: {
+      tabName: "void",
+      godName: "Gojou Satoru",
+      godNickname: "Keeper of the Infinity",
+      tabImageUrl: "../assets/resources/chaos.webp",
+      dialogCount: 0,
+      tabInfo: [""],
+    }
+  },
+  p3_link: {
+    tabName: "anime",
+    godName: "Rimuru Tempest",
+    godNickname: "Chaos Creator",
+    tabImageUrl: "../assets/resources/nyx.webp",
+    dialogCount: 0,
+    tabInfo: [""],
+    isHelper: false,
+  },
+  p3_moon_link: {
+    tabName: "novel",
+    godName: "Senkuu Ishigami",
+    godNickname: "Sorcerer Sage",
+    tabImageUrl: "../assets/resources/nyx.webp",
+    dialogCount: 0,
+    tabInfo: [""],
+    isHelper: false,
+  },
+  p4_link: {
+    tabName: "music",
+    godName: "Kousei Arima and Kaori Miyazono",
+    godNickname: "Human Metronome and Heart Weaver",
+    tabImageUrl: "../assets/resources/nyx.webp",
+    dialogCount: 0,
+    tabInfo: [""],
+    isHelper: false,
+  },
+  p5_link: {
+    tabName: "extras",
+    godName: "",
+    godNickname: "",
+    tabImageUrl: "../assets/resources/nyx.webp",
+    dialogCount: 0,
+    tabInfo: [""],
+    isHelper: false,
+  },
+}
 
 function createStar() {
   const newStar = {
@@ -36,6 +109,39 @@ function toggleMenu() {
   menuActive.value = !menuActive.value;
 }
 
+const getPngUrl = (name) => {
+  return new URL(`${name}`, import.meta.url).href
+}
+
+function updateCurrentTab(data) {
+  currentTabValues.tabName = data.tabName;
+  currentTabValues.godName = data.godName;
+  currentTabValues.godNickname = data.godNickname;
+  currentTabValues.tabImageUrl = data.tabImageUrl;
+  currentTabValues.tabInfo = data.tabInfo;
+}
+
+function changeCurrentTab(e) {
+  currentTabHovered.value = e.target.id
+  let isHelperPresent = godData[currentTabHovered.value + ""]["isHelper"]
+  if (!(isHelperPresent === true)) {
+    updateCurrentTab(godData[currentTabHovered.value + ""])
+  } else
+  {
+    let chances = Math.floor(Math.random() * 100);
+    if (chances <= 90) {
+      updateCurrentTab(godData[currentTabHovered.value + ""])
+    } else
+    {
+      updateCurrentTab(godData[currentTabHovered.value + ""]["helper"])
+    }
+  }
+}
+
+function resetCurrentTab() {
+  currentTabHovered.value = "none"
+}
+
 // Normal js here
 // js ends here
 
@@ -57,7 +163,7 @@ onMounted(() => {
     outerCursor.style.left = `${x}px`
     outerCursor.style.top = `${y}px`
   })
-  let hoverableEntities = Array.from(document.getElementsByClassName("entity"))
+  let hoverableEntities = Array.from(document.getElementsByClassName("clickable"))
   hoverableEntities.forEach((entities) => {
     entities.addEventListener("mouseover", () => {
       innerCursor.classList.add("grow-" + theme.value)
@@ -66,6 +172,15 @@ onMounted(() => {
     entities.addEventListener("mouseleave", () => {
       innerCursor.classList.remove("grow-" + theme.value)
       spinPause.innerHTML = '.orbit { animation-play-state: Playing; }';
+    })
+  })
+  let hoverableItems = Array.from(document.getElementsByClassName("clickable-nostop"))
+  hoverableItems.forEach((entities) => {
+    entities.addEventListener("mouseover", () => {
+      innerCursor.classList.add("grow-" + theme.value)
+    })
+    entities.addEventListener("mouseleave", () => {
+      innerCursor.classList.remove("grow-" + theme.value)
     })
   })
 })
@@ -83,10 +198,42 @@ onMounted(() => {
         <img v-show="theme==='light'" id="logo-img" src="@/assets/Logo/nyxane_svg_light.svg" alt="Nyxane">
       </div>
       <div id="nav-menu" @click="toggleMenu">
-        <div id="menuButton" class="hamburger" :class="{isactive: menuActive }">
+        <div id="menuButton" class="hamburger clickable-nostop" :class="{isactive: menuActive }">
           <span class="menuline"></span>
           <span class="menuline"></span>
           <span class="menuline"></span>
+        </div>
+      </div>
+      <div v-show="menuActive === true" id="menuTab">
+        <div id="tabInfo" class="menuTabElements">
+          <div v-if="currentTabHovered !== 'none'" id="god_pane">
+            <div id="entity_god_wrapper">
+            <img id="entity_god" :src="getPngUrl(currentTabValues.tabImageUrl)" alt="">
+            </div>
+            <div id="entity_dialogue">{{ currentTabValues.tabInfo[0] }}</div>
+          </div>
+        </div>
+        <div id="tabLinks" class="menuTabElements">
+          <ul>
+            <li id="p1_link" class="tabPageLinks clickable-nostop" @mouseenter="changeCurrentTab"
+                @mouseleave="resetCurrentTab">Disboard
+            </li>
+            <li id="p2_link" class="tabPageLinks clickable-nostop" @mouseenter="changeCurrentTab"
+                @mouseleave="resetCurrentTab">Void
+            </li>
+            <li id="p3_link" class="tabPageLinks clickable-nostop" @mouseenter="changeCurrentTab"
+                @mouseleave="resetCurrentTab">Animon <span id="mythicPageLink">Mythic</span></li>
+            <li id="p4_link" class="tabPageLinks clickable-nostop" @mouseenter="changeCurrentTab"
+                @mouseleave="resetCurrentTab">Synth
+            </li>
+            <li id="p5_link" class="tabPageLinks clickable-nostop" @mouseenter="changeCurrentTab"
+                @mouseleave="resetCurrentTab">Haven
+            </li>
+          </ul>
+          <div id="menuOptions">
+            <div class="menuOption">About Nyxane</div>
+            <div class="menuOption">Settings</div>
+          </div>
         </div>
       </div>
     </nav>
@@ -99,35 +246,35 @@ onMounted(() => {
       <div id="container">
 
         <div id="ring0" class="orbit">
-          <router-link class="nav-link entity" :to="{name : 'games-page'}">
+          <router-link class="nav-link entity clickable" :to="{name : 'games-page'}">
             <div id="planet0" class="entity"></div>
           </router-link>
 
           <div id="ring1" class="orbit">
-            <router-link class="nav-link entity" :to="{name : 'void-page'}">
+            <router-link class="nav-link entity clickable" :to="{name : 'void-page'}">
               <div id="planet1" class="entity"></div>
             </router-link>
 
             <div id="ring2" class="orbit">
-              <router-link class="nav-link entity" :to="{name : 'anime-page'}">
+              <router-link class="nav-link entity clickable" :to="{name : 'anime-page'}">
                 <div id="planet2" class="entity">
                   <div id="p2_moon" class="entity"></div>
                 </div>
               </router-link>
 
               <div id="ring3" class="orbit">
-                <router-link class="nav-link entity" :to="{name : 'music-page'}">
+                <router-link class="nav-link entity clickable" :to="{name : 'music-page'}">
                   <div id="planet3" class="entity"></div>
                 </router-link>
 
                 <div id="ring4" class="orbit">
-                  <router-link class="nav-link entity" :to="{name : 'extras-page'}">
+                  <router-link class="nav-link entity clickable" :to="{name : 'extras-page'}">
                     <div id="planet4" class="entity"></div>
                   </router-link>
 
                   <!--Center Star ( Black )-->
                   <router-link class="nav-link-star" :to="{name : 'github-page'}">
-                    <div id="star" class="entity">
+                    <div id="star" class="entity clickable">
                       <!--<img src="@/assets/resources/aqual.svg" alt="">-->
                     </div>
                   </router-link>
@@ -144,13 +291,25 @@ onMounted(() => {
 
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap');
+
 * {
   cursor: none;
+  font-family: 'Marcellus SC', serif;
 }
 
 
 
 /* Navbar styles */
+@keyframes menuOpenAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 #nav-bar {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -160,6 +319,7 @@ onMounted(() => {
   display: grid;
   justify-self: right;
   align-self: center;
+  z-index: 9999;
 
   position: relative;
   top: 15px;
@@ -227,6 +387,116 @@ onMounted(() => {
   -webkit-transform: translateY(-13px) rotate(90deg);
   -ms-transform: translateY(-13px) rotate(90deg);
   transform: translateY(-13px) rotate(90deg);
+}
+
+#menuTab {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  z-index: 999;
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: 2fr 0.65fr;
+
+  animation-name: menuOpenAnimation;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in;
+
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-left: 3px solid white;
+}
+
+.menuTabElements {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: grid;
+  align-content: center;
+  overflow: hidden;
+}
+
+.menuTabElements ul {
+  margin: 0;
+  padding: 0px;
+  font-size: 4em;
+  display: grid;
+  align-items: center;
+  grid-template-rows: repeat(5, 1fr);
+  padding-left: 10px;
+}
+
+.tabPageLinks {
+  color: white;
+  list-style: none;
+  padding: 20px;
+  display: grid;
+  position: relative;
+  text-align: center;
+}
+
+.tabPageLinks:hover {
+  transition: 0.1s;
+  scale: 1.1;
+  border-right: 19.5px solid white;
+}
+
+#mythicPageLink {
+  position: absolute;
+  bottom: 0;
+  justify-self: center;
+  font-size: 0.5em;
+  color: var(--planet2-moon-color);
+}
+
+#p1_link {
+  color: var(--planet-color);
+}
+
+#p2_link {
+  color: var(--planet-color1);
+}
+
+#p3_link {
+  color: var(--planet-color2);
+}
+
+#p4_link {
+  color: var(--planet-color3);
+}
+
+#p5_link {
+  color: var(--planet-color4);
+}
+
+#menuOptions {
+  display: grid;
+  grid-template-columns: 1fr 0.5fr;
+  justify-items: center;
+  position: absolute;
+  top: 25px;
+  right: 5em;
+  color: white;
+}
+
+.menuOption {
+  padding: 10px;
+}
+
+
+
+#god_pane {
+  height: 100vh;
+}
+#entity_god_wrapper {
+  position: absolute;
+  bottom: 0;
+}
+#entity_god {
+  width: 650px;
+}
+#entity_dialogue {
+  color: white;
 }
 
 
@@ -393,7 +663,7 @@ onMounted(() => {
 #p2_moon {
   height: 4px;
   width: 4px;
-  background-color: chartreuse;
+  background-color: var(--planet2-moon-color);
   justify-self: center;
   position: absolute;
   top: -7px;
@@ -429,7 +699,6 @@ onMounted(() => {
 }
 
 
-
 /* Cursor styles */
 .cursor-circle {
   position: fixed;
@@ -447,6 +716,7 @@ onMounted(() => {
   background-color: white;
   transition: width 0.5s, height 0.5s;
 }
+
 #inner-circle-light.grow-light {
   height: 30px;
   width: 30px;
@@ -462,6 +732,7 @@ onMounted(() => {
   mix-blend-mode: difference;
   transition: width 0.5s, height 0.5s;
 }
+
 #inner-circle-dark.grow-dark {
   height: 30px;
   width: 30px;

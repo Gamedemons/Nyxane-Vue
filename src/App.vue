@@ -7,7 +7,7 @@
 </script>
 
 <template>
-  <div>
+  <div id="app-descendant">
     <section>
       <router-view/>
     </section>
