@@ -160,6 +160,10 @@ onMounted(() => {
   display: grid;
   justify-self: right;
   align-self: center;
+
+  position: relative;
+  top: 15px;
+  right: 25px;
 }
 
 #logo-img-wrapper {
@@ -185,11 +189,11 @@ onMounted(() => {
   position: absolute;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   border: 5px solid transparent;
-  top: calc(50% - 35px);
-  left: calc(50% - 35px);
+  top: calc(50% - 30px);
+  left: calc(50% - 31px);
   border-radius: 50%;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
@@ -202,6 +206,7 @@ onMounted(() => {
   width: 50px;
   height: 5px;
   background-color: #ecf0f1;
+  border-radius: 25px;
   display: block;
   margin: 8px auto;
   -webkit-transition: all 0.3s ease-in-out;
