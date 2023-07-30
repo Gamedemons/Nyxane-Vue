@@ -1,5 +1,6 @@
 <script setup>
 import {onMounted, reactive, ref} from 'vue'
+import DialogBox from "@/components/DialogBox.vue";
 
 const theme = ref('dark')
 const menuActive = ref(false)
@@ -27,7 +28,13 @@ let godData = {
         "Hey there how is it going ?",
         "Looking as good as ever I see.",
         "You are asking me how I got so strong ? Well that's by dying a lot of times ( I'm not kidding ! )",
-        "Now where did that flatboard witch go... I swear I saw her running in this direction."
+        "You know I once fought the three fury sisters of underworld alone. The result ? I won of course...",
+        "Take a breather mate, you have been running around a lot lately",
+        "Have you seen a flatboard witch somewhere around here... I swear I saw her running in this direction.",
+        "Hello friend. Have you met Gojou from the Void realm yet ? He's cheeky but is a nice friend nonetheless.",
+        "You lost your way again, man you sure have it hard huh...",
+        "Hey there buddy, I hope you are having a fine day."
+
     ],
     isHelper: false,
   },
@@ -39,9 +46,10 @@ let godData = {
     dialogCount: 0,
     tabInfo: [
         "Hello child. This is the void realm. Im Shallow Vernal, the creator of this realm. You are free to wander if you want.",
-        "The great overseer is currently busy thinking about the incomprehensibly complex problems of the void realm.",
+        "The great overseer is currently busy thinking about the incomprehensibly complex problems of the void realm ( Even though she seems to be looking at you ).",
         "You're asking me if I am interested in you ? Well I already have my Kaito san so I dont need anyone else.",
-        "The great overseer spends her day as peacefully as ever."
+        "The great overseer spends her day as peacefully as ever.",
+        "Did you have a good time ?"
     ],
     isHelper: true,
     helper: {
@@ -50,7 +58,19 @@ let godData = {
       godNickname: "Keeper of the Infinity",
       tabImageUrl: "../assets/resources/chaos.webp",
       dialogCount: 0,
-      tabInfo: [""],
+      tabInfo: [
+          "You mesmerised yet ? Of course you are, Megumi chan look another one has fallen to my charms...",
+          "You like my headband, thanks !",
+          "Ah ! I was just doing my own thing, dont ming me.",
+          "Its such a pain cleaning up the afermath of the cursed spirits, and that's why i have Nanami.",
+          "Make sure you dont create any problems around here or I'll kill you okay hehehe...",
+          "Wow... We meet again. Wait let me think what was our name again... Nah I forgot.",
+          "Have you eaten the steamed buns I bought from kyoto, they are just the best.",
+          "Do I look good ?",
+          "This aura around me ? That's cursed energy, but dont worry its safe.",
+          "How do we keep meeting again and again despite me being so busy. You must be one of my stalker fans then. It's okay I wont judge...",
+      ],
+      isHelper: false,
     }
   },
   p3_link: {
@@ -79,7 +99,7 @@ let godData = {
     godNickname: "Human Metronome and Heart Weaver",
     tabImageUrl: "../assets/resources/nyx.webp",
     dialogCount: 0,
-    tabInfo: [""],
+    tabInfo: ["Welcome to synth my friend. Im Kousei Arima and she is Kaori Miyazono. Its nice to meet you."],
     isHelper: false,
   },
   p5_link: {
@@ -88,7 +108,18 @@ let godData = {
     godNickname: "",
     tabImageUrl: "../assets/resources/nyx.webp",
     dialogCount: 0,
-    tabInfo: [""],
+    tabInfo: [
+        "Nhhghhhg gh gh...",
+        "Gguhhhhhh...",
+        "Urrrnngghhhh…",
+        "Haahhhhh…",
+        "Hhhaaaaaaahhh…",
+        "Hheeehhhhhh…..",
+        "Nrrnnhhh, hhnnn, hrnnn, hrnnnn…............",
+        "Rhhuuaaaauugghhhh….",
+        "Hrrrrnnghhhhhhhhh….",
+        "nnnnrrhhhh…."
+    ],
     isHelper: false,
   },
 }
@@ -105,7 +136,6 @@ function createStar() {
     bg_starList.value.shift();
   }, 10000);
 }
-
 function animateStars() {
   setInterval(() => {
     createStar();
@@ -124,10 +154,12 @@ function toggleMenu() {
   menuActive.value = !menuActive.value;
 }
 
-const getPngUrl = (name) => {
-  return new URL(`${name}`, import.meta.url).href
+function printDialog(dialogCount, length) {
+  if(dialogCount < (length - 1)){
+    return true
+  }
+  return false
 }
-
 function updateCurrentTab(data) {
   currentTabValues.tabName = data.tabName;
   currentTabValues.godName = data.godName;
@@ -135,32 +167,42 @@ function updateCurrentTab(data) {
   currentTabValues.tabImageUrl = data.tabImageUrl;
   currentTabValues.tabInfo = data.tabInfo[data.dialogCount];
 }
-
 function changeCurrentTab(e) {
   currentTabHovered.value = e.target.id
-  let isHelperPresent = godData[currentTabHovered.value + ""]["isHelper"]
+  let currentGod = godData[currentTabHovered.value + ""]
+  let godDialogLength = currentGod["tabInfo"].length
+  let isHelperPresent = currentGod["isHelper"]
+
   if (!(isHelperPresent === true)) {
-    updateCurrentTab(godData[currentTabHovered.value + ""])
-    godData[currentTabHovered.value + ""]["dialogCount"] += 1
-  } else
-  {
+    updateCurrentTab(currentGod)
+    if(printDialog(currentGod["dialogCount"], godDialogLength)){
+      currentGod["dialogCount"] += 1
+    }
+  } else {
     let chances = Math.floor(Math.random() * 100);
     if (chances <= 90) {
-      updateCurrentTab(godData[currentTabHovered.value + ""])
-      godData[currentTabHovered.value + ""]["dialogCount"] += 1
-    } else
-    {
-      updateCurrentTab(godData[currentTabHovered.value + ""]["helper"])
-      godData[currentTabHovered.value + ""]["helper"]["dialogCount"] += 1
+      updateCurrentTab(currentGod)
+      if(printDialog(currentGod["dialogCount"], godDialogLength)){
+        currentGod["dialogCount"] += 1
+      }
+    } else {
+      currentGod = currentGod["helper"]
+      godDialogLength = currentGod["tabInfo"].length
+      updateCurrentTab(currentGod)
+      if(printDialog(currentGod["dialogCount"], godDialogLength)){
+        currentGod["dialogCount"] += 1
+      }
     }
   }
 }
-
 function resetCurrentTab() {
   currentTabHovered.value = "none"
 }
 
 // Normal js here
+const getPngUrl = (name) => {
+  return new URL(`${name}`, import.meta.url).href
+}
 // js ends here
 
 onMounted(() => {
@@ -212,8 +254,8 @@ onMounted(() => {
 
     <nav id="nav-bar">
       <div id="logo-img-wrapper" @click="changeTheme">
-        <img v-show="theme==='dark'" id="logo-img" src="@/assets/Logo/nyxane_svg_dark.svg" alt="Nyxane">
-        <img v-show="theme==='light'" id="logo-img" src="@/assets/Logo/nyxane_svg_light.svg" alt="Nyxane">
+        <img v-show="theme==='dark'" id="logo-img" src="@/assets/logo/nyxane_svg_dark.svg" alt="Nyxane">
+        <img v-show="theme==='light'" id="logo-img" src="@/assets/logo/nyxane_svg_light.svg" alt="Nyxane">
       </div>
       <div id="nav-menu" @click="toggleMenu">
         <div id="menuButton" class="hamburger clickable-nostop" :class="{isactive: menuActive }">
@@ -228,7 +270,11 @@ onMounted(() => {
             <div id="entity_god_wrapper">
             <img id="entity_god" :src="getPngUrl(currentTabValues.tabImageUrl)" alt="">
             </div>
-            <div id="entity_dialogue">{{ currentTabValues.tabInfo}}</div>
+            <!--<div id="dialog_box">
+              <div id="entity_dialogue">{{ currentTabValues.tabInfo}}</div>
+            </div>-->
+            <!--<img src="@/assets/resources/dialogue_box.png" alt="">-->
+            <dialog-box :godName="currentTabValues.godName" :tabInfo="currentTabValues.tabInfo"></dialog-box>
           </div>
         </div>
         <div id="tabLinks" class="menuTabElements">
@@ -515,6 +561,14 @@ onMounted(() => {
 #entity_god {
   width: 650px;
 }
+/*#dialog_box {
+  background: url("../assets/resources/dialogue_box.png");
+  width: 1020px;
+  aspect-ratio: 16/9;
+  position: absolute;
+  bottom: 0px;
+  left: 300px;
+}
 #entity_dialogue {
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
@@ -527,7 +581,7 @@ onMounted(() => {
   width: 25em;
   height: 6em;
   justify-self: end;
-}
+}*/
 
 
 
