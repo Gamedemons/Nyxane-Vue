@@ -1,13 +1,18 @@
 <script setup>
 const props = defineProps({
   godName: { type: String, required: true },
-  tabInfo: {type: String, required: true}
+  tabInfo: {type: String, required: true},
+  dialogueBoxUrl: {type: String, required: true}
 })
+
+const getUrl = (name) => {
+  return new URL(`${name}`, import.meta.url).href
+}
 </script>
 
 <template>
 <div id="dialoge_div">
-  <img src="@/assets/resources/dialogue_box.png" alt="">
+  <img :src="getUrl(dialogueBoxUrl)" alt="">
   <div id="god_name_holder">{{godName}}</div>
   <div id="entity_dialogue">
     {{tabInfo}}
@@ -52,7 +57,7 @@ img {
   text-align: center;
   color: white;
   font-weight: bold;
-  top: 536px;
+  top: 530px;
   left: 553px;
   height: 50px;
   width: 250px;

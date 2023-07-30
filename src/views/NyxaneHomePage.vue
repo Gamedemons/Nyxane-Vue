@@ -6,20 +6,23 @@ const theme = ref('dark')
 const menuActive = ref(false)
 const bg_starList = ref([]);
 const currentTabHovered = ref("none")
+const helperChance = ref(60)
 const currentTabValues = reactive({
   tabName: "",
   godName: "",
   godNickname: "",
   tabImageUrl: "",
+  dialogueBoxUrl: "",
   tabInfo: ""
 })
 
 let godData = {
   p1_link: {
-    tabName: "games",
+    tabName: "disboard",
     godName: "Zagreus",
     godNickname: "Fate Breaker",
-    tabImageUrl: "../assets/resources/zagreus.png",
+    tabImageUrl: "../assets/resources/gods/zagreus.png",
+    dialogueBoxUrl: "../assets/resources/dialogues/dialogue_box_1.svg",
     dialogCount: 0,
     tabInfo: [
         "Greetings friend ! I'm Zagreus, the god of Disboard. What is Disboard you ask ?? Well it a world of games, everything you do or see is related to games somehow. Ah ! I nearly forgot, Welcome to the world of Disboard my firend.",
@@ -42,7 +45,8 @@ let godData = {
     tabName: "void",
     godName: "Shallow Vernal",
     godNickname: "The Epilogue",
-    tabImageUrl: "../assets/resources/nyx.webp",
+    tabImageUrl: "../assets/resources/gods/shallow_vernal.svg",
+    dialogueBoxUrl: "../assets/resources/dialogues/dialogue_box_2.svg",
     dialogCount: 0,
     tabInfo: [
         "Hello child. This is the void realm. Im Shallow Vernal, the creator of this realm. You are free to wander if you want.",
@@ -56,12 +60,13 @@ let godData = {
       tabName: "void",
       godName: "Gojou Satoru",
       godNickname: "Keeper of the Infinity",
-      tabImageUrl: "../assets/resources/chaos.webp",
+      tabImageUrl: "../assets/resources/gods/satoru_gojou.svg",
+      dialogueBoxUrl: "../assets/resources/dialogues/dialogue_box_2.svg",
       dialogCount: 0,
       tabInfo: [
           "You mesmerised yet ? Of course you are, Megumi chan look another one has fallen to my charms...",
           "You like my headband, thanks !",
-          "Ah ! I was just doing my own thing, dont ming me.",
+          "Ah ! I was just doing my own thing, dont mind me.",
           "Its such a pain cleaning up the afermath of the cursed spirits, and that's why i have Nanami.",
           "Make sure you dont create any problems around here or I'll kill you okay hehehe...",
           "Wow... We meet again. Wait let me think what was our name again... Nah I forgot.",
@@ -74,39 +79,43 @@ let godData = {
     }
   },
   p3_link: {
-    tabName: "anime",
+    tabName: "animon",
     godName: "Rimuru Tempest",
     godNickname: "Chaos Creator",
-    tabImageUrl: "../assets/resources/nyx.webp",
+    tabImageUrl: "../assets/resources/gods/rimuru_tempest.svg",
+    dialogueBoxUrl: "../assets/resources/dialogues/dialogue_box_3.svg",
     dialogCount: 0,
     tabInfo: [
         "Hey ! I'm Rimuru Tempest, the founder of Tempest Nation and the god of Animon and this here is my friend Senkuu Ishigami. I'm ten billion percent sure you would have heard of him. If not, you just might be living under a rock.",
     ],
-    isHelper: false,
-  },
-  p3_moon_link: {
-    tabName: "novel",
-    godName: "Senkuu Ishigami",
-    godNickname: "Sorcerer Sage",
-    tabImageUrl: "../assets/resources/nyx.webp",
-    dialogCount: 0,
-    tabInfo: [""],
-    isHelper: false,
+    isHelper: true,
+    helper: {
+      tabName: "mythic",
+      godName: "Senkuu Ishigami",
+      godNickname: "Sorcerer Sage",
+      tabImageUrl: "../assets/resources/nyx.webp",
+      dialogueBoxUrl: "../assets/resources/dialogues/dialogue_box_3_moon.svg",
+      dialogCount: 0,
+      tabInfo: [""],
+      isHelper: false,
+    }
   },
   p4_link: {
-    tabName: "music",
+    tabName: "synth",
     godName: "Kousei Arima and Kaori Miyazono",
     godNickname: "Human Metronome and Heart Weaver",
     tabImageUrl: "../assets/resources/nyx.webp",
+    dialogueBoxUrl: "../assets/resources/dialogues/dialogue_box_4.svg",
     dialogCount: 0,
     tabInfo: ["Welcome to synth my friend. Im Kousei Arima and she is Kaori Miyazono. Its nice to meet you."],
     isHelper: false,
   },
   p5_link: {
-    tabName: "extras",
-    godName: "",
-    godNickname: "",
+    tabName: "haven",
+    godName: "Raven Blackforst",
+    godNickname: "Nightblade",
     tabImageUrl: "../assets/resources/nyx.webp",
+    dialogueBoxUrl: "../assets/resources/dialogues/dialogue_box_5.svg",
     dialogCount: 0,
     tabInfo: [
         "Nhhghhhg gh gh...",
@@ -165,6 +174,7 @@ function updateCurrentTab(data) {
   currentTabValues.godName = data.godName;
   currentTabValues.godNickname = data.godNickname;
   currentTabValues.tabImageUrl = data.tabImageUrl;
+  currentTabValues.dialogueBoxUrl = data.dialogueBoxUrl;
   currentTabValues.tabInfo = data.tabInfo[data.dialogCount];
 }
 function changeCurrentTab(e) {
@@ -180,7 +190,7 @@ function changeCurrentTab(e) {
     }
   } else {
     let chances = Math.floor(Math.random() * 100);
-    if (chances <= 90) {
+    if (chances <= helperChance.value) {
       updateCurrentTab(currentGod)
       if(printDialog(currentGod["dialogCount"], godDialogLength)){
         currentGod["dialogCount"] += 1
@@ -200,7 +210,7 @@ function resetCurrentTab() {
 }
 
 // Normal js here
-const getPngUrl = (name) => {
+const getUrl = (name) => {
   return new URL(`${name}`, import.meta.url).href
 }
 // js ends here
@@ -268,13 +278,13 @@ onMounted(() => {
         <div id="tabInfo" class="menuTabElements">
           <div v-if="currentTabHovered !== 'none'" id="god_pane">
             <div id="entity_god_wrapper">
-            <img id="entity_god" :src="getPngUrl(currentTabValues.tabImageUrl)" alt="">
+              <img id="entity_god" :src="getUrl(currentTabValues.tabImageUrl)" alt="">
             </div>
-            <!--<div id="dialog_box">
-              <div id="entity_dialogue">{{ currentTabValues.tabInfo}}</div>
-            </div>-->
-            <!--<img src="@/assets/resources/dialogue_box.png" alt="">-->
-            <dialog-box :godName="currentTabValues.godName" :tabInfo="currentTabValues.tabInfo"></dialog-box>
+            <dialog-box
+                :godName="currentTabValues.godName"
+                :tabInfo="currentTabValues.tabInfo"
+                :dialogueBoxUrl="currentTabValues.dialogueBoxUrl"
+            ></dialog-box>
           </div>
         </div>
         <div id="tabLinks" class="menuTabElements">
@@ -561,27 +571,6 @@ onMounted(() => {
 #entity_god {
   width: 650px;
 }
-/*#dialog_box {
-  background: url("../assets/resources/dialogue_box.png");
-  width: 1020px;
-  aspect-ratio: 16/9;
-  position: absolute;
-  bottom: 0px;
-  left: 300px;
-}
-#entity_dialogue {
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  font-size: 2em;
-  padding: 10px 10px 10px 15px;
-  border: 3px solid white;
-  border-radius: 20px;
-  position: absolute;
-  bottom: 40px;
-  width: 25em;
-  height: 6em;
-  justify-self: end;
-}*/
 
 
 
