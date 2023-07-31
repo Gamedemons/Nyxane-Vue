@@ -164,10 +164,7 @@ function toggleMenu() {
 }
 
 function printDialog(dialogCount, length) {
-  if(dialogCount < (length - 1)){
-    return true
-  }
-  return false
+  return dialogCount < (length - 1);
 }
 function updateCurrentTab(data) {
   currentTabValues.tabName = data.tabName;
@@ -210,9 +207,9 @@ function resetCurrentTab() {
 }
 
 // Normal js here
-const getUrl = (name) => {
-  return new URL(`${name}`, import.meta.url).href
-}
+// const getUrl = (name) => {
+//   return new URL(`${name}`, import.meta.url).href
+// }
 // js ends here
 
 onMounted(() => {
@@ -492,12 +489,11 @@ onMounted(() => {
 
 .menuTabElements ul {
   margin: 0;
-  padding: 0px;
   font-size: 4em;
   display: grid;
   align-items: center;
   grid-template-rows: repeat(5, 1fr);
-  padding-left: 10px;
+  padding: 0px 0px 0px 10px;
 }
 
 .tabPageLinks {
@@ -512,7 +508,7 @@ onMounted(() => {
 .tabPageLinks:hover {
   transition: 0.1s;
   scale: 1.1;
-  border-right: 19.5px solid white;
+  border-right: 20px solid white;
 }
 
 #mythicPageLink {
