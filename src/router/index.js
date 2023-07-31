@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 /*import App from "@/App.vue";*/
-import NyxaneHomePage from "@/views/NyxaneHomePage.vue";
+import NyxaneHomePage from "@/views/HomePage.vue";
 import GamesPage from "@/views/GamesPage.vue";
 import VoidPage from "@/views/VoidPage.vue";
 import AnimePage from "@/views/AnimePage.vue";

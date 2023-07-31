@@ -12,7 +12,7 @@ const getUrl = (name) => {
 
 <template>
 <div id="dialoge_div">
-  <img :src="getUrl(dialogueBoxUrl)" alt="">
+  <img :src="dialogueBoxUrl" alt="">
   <div id="god_name_holder">{{godName}}</div>
   <div id="entity_dialogue">
     {{tabInfo}}

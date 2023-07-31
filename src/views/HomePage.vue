@@ -6,7 +6,7 @@ const theme = ref('dark')
 const menuActive = ref(false)
 const bg_starList = ref([]);
 const currentTabHovered = ref("none")
-const helperChance = ref(60)
+const helperChance = ref(90)
 const currentTabValues = reactive({
   tabName: "",
   godName: "",
@@ -21,8 +21,8 @@ let godData = {
     tabName: "disboard",
     godName: "Zagreus",
     godNickname: "Fate Breaker",
-    tabImageUrl: "../assets/resources/gods/zagreus.png",
-    dialogueBoxUrl: "../assets/resources/dialogues/dialogue_box_1.svg",
+    tabImageUrl: "resources/gods/zagreus.png",
+    dialogueBoxUrl: "resources/dialogues/dialogue_box_1.svg",
     dialogCount: 0,
     tabInfo: [
         "Greetings friend ! I'm Zagreus, the god of Disboard. What is Disboard you ask ?? Well it a world of games, everything you do or see is related to games somehow. Ah ! I nearly forgot, Welcome to the world of Disboard my firend.",
@@ -45,8 +45,8 @@ let godData = {
     tabName: "void",
     godName: "Shallow Vernal",
     godNickname: "The Epilogue",
-    tabImageUrl: "../assets/resources/gods/shallow_vernal.svg",
-    dialogueBoxUrl: "../assets/resources/dialogues/dialogue_box_2.svg",
+    tabImageUrl: "resources/gods/shallow_vernal.svg",
+    dialogueBoxUrl: "resources/dialogues/dialogue_box_2.svg",
     dialogCount: 0,
     tabInfo: [
         "Hello child. This is the void realm. Im Shallow Vernal, the creator of this realm. You are free to wander if you want.",
@@ -60,8 +60,8 @@ let godData = {
       tabName: "void",
       godName: "Gojou Satoru",
       godNickname: "Keeper of the Infinity",
-      tabImageUrl: "../assets/resources/gods/satoru_gojou.svg",
-      dialogueBoxUrl: "../assets/resources/dialogues/dialogue_box_2.svg",
+      tabImageUrl: "resources/gods/satoru_gojou.svg",
+      dialogueBoxUrl: "resources/dialogues/dialogue_box_2.svg",
       dialogCount: 0,
       tabInfo: [
           "You mesmerised yet ? Of course you are, Megumi chan look another one has fallen to my charms...",
@@ -82,8 +82,8 @@ let godData = {
     tabName: "animon",
     godName: "Rimuru Tempest",
     godNickname: "Chaos Creator",
-    tabImageUrl: "../assets/resources/gods/rimuru_tempest.svg",
-    dialogueBoxUrl: "../assets/resources/dialogues/dialogue_box_3.svg",
+    tabImageUrl: "resources/gods/rimuru_tempest.svg",
+    dialogueBoxUrl: "resources/dialogues/dialogue_box_3.svg",
     dialogCount: 0,
     tabInfo: [
         "Hey ! I'm Rimuru Tempest, the founder of Tempest Nation and the god of Animon and this here is my friend Senkuu Ishigami. I'm ten billion percent sure you would have heard of him. If not, you just might be living under a rock.",
@@ -93,8 +93,8 @@ let godData = {
       tabName: "mythic",
       godName: "Senkuu Ishigami",
       godNickname: "Sorcerer Sage",
-      tabImageUrl: "../assets/resources/nyx.webp",
-      dialogueBoxUrl: "../assets/resources/dialogues/dialogue_box_3_moon.svg",
+      tabImageUrl: "resources/nyx.webp",
+      dialogueBoxUrl: "resources/dialogues/dialogue_box_3_moon.svg",
       dialogCount: 0,
       tabInfo: [""],
       isHelper: false,
@@ -104,8 +104,8 @@ let godData = {
     tabName: "synth",
     godName: "Kousei Arima and Kaori Miyazono",
     godNickname: "Human Metronome and Heart Weaver",
-    tabImageUrl: "../assets/resources/nyx.webp",
-    dialogueBoxUrl: "../assets/resources/dialogues/dialogue_box_4.svg",
+    tabImageUrl: "resources/nyx.webp",
+    dialogueBoxUrl: "resources/dialogues/dialogue_box_4.svg",
     dialogCount: 0,
     tabInfo: ["Welcome to synth my friend. Im Kousei Arima and she is Kaori Miyazono. Its nice to meet you."],
     isHelper: false,
@@ -114,8 +114,8 @@ let godData = {
     tabName: "haven",
     godName: "Raven Blackforst",
     godNickname: "Nightblade",
-    tabImageUrl: "../assets/resources/nyx.webp",
-    dialogueBoxUrl: "../assets/resources/dialogues/dialogue_box_5.svg",
+    tabImageUrl: "resources/nyx.webp",
+    dialogueBoxUrl: "resources/dialogues/dialogue_box_5.svg",
     dialogCount: 0,
     tabInfo: [
         "Nhhghhhg gh gh...",
@@ -278,7 +278,7 @@ onMounted(() => {
         <div id="tabInfo" class="menuTabElements">
           <div v-if="currentTabHovered !== 'none'" id="god_pane">
             <div id="entity_god_wrapper">
-              <img id="entity_god" :src="getUrl(currentTabValues.tabImageUrl)" alt="">
+              <img id="entity_god" :src="currentTabValues.tabImageUrl" alt="">
             </div>
             <dialog-box
                 :godName="currentTabValues.godName"
