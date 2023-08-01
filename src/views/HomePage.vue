@@ -93,7 +93,7 @@ let godData = {
       tabName: "mythic",
       godName: "Senkuu Ishigami",
       godNickname: "Sorcerer Sage",
-      tabImageUrl: "resources/nyx.webp",
+      tabImageUrl: "resources/gods/senkuu_ishigami.svg",
       dialogueBoxUrl: "resources/dialogues/dialogue_box_3_moon.svg",
       dialogCount: 0,
       tabInfo: [""],
@@ -104,7 +104,7 @@ let godData = {
     tabName: "synth",
     godName: "Kousei Arima and Kaori Miyazono",
     godNickname: "Human Metronome and Heart Weaver",
-    tabImageUrl: "resources/nyx.webp",
+    tabImageUrl: "resources/gods/kousei_arima_and_kaori_miyazono.svg",
     dialogueBoxUrl: "resources/dialogues/dialogue_box_4.svg",
     dialogCount: 0,
     tabInfo: ["Welcome to synth my friend. Im Kousei Arima and she is Kaori Miyazono. Its nice to meet you."],
@@ -114,7 +114,7 @@ let godData = {
     tabName: "haven",
     godName: "Raven Blackforst",
     godNickname: "Nightblade",
-    tabImageUrl: "resources/nyx.webp",
+    tabImageUrl: "resources/gods/raven.svg",
     dialogueBoxUrl: "resources/dialogues/dialogue_box_5.svg",
     dialogCount: 0,
     tabInfo: [
@@ -271,7 +271,7 @@ onMounted(() => {
           <span class="menuline"></span>
         </div>
       </div>
-      <div v-show="menuActive === true" id="menuTab">
+      <div v-if="menuActive === true" id="menuTab">
         <div id="tabInfo" class="menuTabElements">
           <div v-if="currentTabHovered !== 'none'" id="god_pane">
             <div id="entity_god_wrapper">
