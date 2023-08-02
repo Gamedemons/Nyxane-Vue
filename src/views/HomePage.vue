@@ -37,7 +37,6 @@ let godData = {
         "Hello friend. Have you met Gojou from the Void realm yet ? He's cheeky but is a nice friend nonetheless.",
         "You lost your way again, man you sure have it hard huh...",
         "Hey there buddy, I hope you are having a fine day."
-
     ],
     isHelper: false,
   },
@@ -49,11 +48,14 @@ let godData = {
     dialogueBoxUrl: "resources/dialogues/dialogue_box_2.svg",
     dialogCount: 0,
     tabInfo: [
-        "Hello child. This is the void realm. Im Shallow Vernal, the creator of this realm. You are free to wander if you want.",
+        "Hello child. This is the void realm. Im Shallow Vernal, the creator of this realm. You are free to look around if you wish.",
         "The great overseer is currently busy thinking about the incomprehensibly complex problems of the void realm ( Even though she seems to be looking at you ).",
         "You're asking me if I am interested in you ? Well I already have my Kaito san so I dont need anyone else.",
         "The great overseer spends her day as peacefully as ever.",
-        "Did you have a good time ?"
+        "Are you having a good time ?",
+        "Have you met my subordinate. He is quite a handful but fun guy.",
+        "The void realm you see as the name states does not have any specific property. It is a collection of seemingly wide variety of things which may range from abstract concepts to metaphysical matter.",
+        ""
     ],
     isHelper: true,
     helper: {
